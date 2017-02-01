@@ -210,3 +210,4 @@ fabric.properties
 /posts/migrations/
 /posts/template_tags/
 /db.sqlite3
+/newsletters/migrations/
