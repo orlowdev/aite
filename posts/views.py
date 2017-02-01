@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
 
 from . import options
 from .forms import PostForm
@@ -10,7 +12,19 @@ from .models import Post
 
 # Post list view
 def post_list(request):
-    all_posts = Post.objects.all()
+    all_posts = Post.objects.visible()
+    if request.user.is_staff or request.user.is_superuser:
+        all_posts = Post.objects.all()
+
+    """ Search presets """
+    query = request.GET.get('q')
+    if query:
+        all_posts = all_posts.filter(Q(title__icontains=query) |
+                                     Q(content__icontains=query) |
+                                     Q(user__first_name__icontains=query) |
+                                     Q(user__last_name__icontains=query) |
+                                     Q(user__username__icontains=query)
+                                     ).distinct()
 
     """ Paginator presets """
     paginator = Paginator(all_posts, options.BLOG_PAGINATION)
@@ -31,7 +45,11 @@ def post_list(request):
 
 # Post detail view
 def post_detail(request, slug=None):
+
     post = get_object_or_404(Post, slug=slug)
+    if post.draft or post.publication_date > timezone.now().date():
+        if not request.user.is_staff or not request.user.is_superuser:
+            raise Http404
 
     return render(request, "detail.html", {
         "post": post,

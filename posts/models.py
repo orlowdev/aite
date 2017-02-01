@@ -1,8 +1,15 @@
-from django.db import models
-from django.urls import reverse
-from django.db.models.signals import pre_save
-from django.utils.text import slugify
 from django.conf import settings
+from django.db import models
+from django.db.models.signals import pre_save
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.text import slugify
+
+
+# Blog post model manager
+class PostManager(models.Manager):
+    def visible(self, *args, **kwargs):
+        return super(PostManager, self).filter(draft=False).filter(publication_date__lte=timezone.now())
 
 
 # Upload location definition for user files
@@ -50,6 +57,11 @@ class Post(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+
+    """ Model manager injection
+    'objects' is a conventional name yet it may be overriden
+    In this case all references must be Post.'new_name'.* """
+    objects = PostManager()
 
     def __str__(self):
         return self.title
