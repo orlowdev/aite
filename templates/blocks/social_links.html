@@ -1,0 +1,11 @@
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+    Facebook
+</a>
+<a href="https://twitter.com/home?status={{ post.content|urlencode|truncatechars:140 }}{{ request.build_absolute_uri }}">
+    Twitter
+</a>
+<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Google Plus</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title|urlencode }}&source={{ request.build_absolute_uri }}">
+    Linkedin
+</a>
+<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ instance.title|urlencode }}">Reddit</a>

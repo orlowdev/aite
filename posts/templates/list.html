@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Totemish Blog{% endblock %}
+
+{% block body %}
+    <div class="col-sm-8 col-sm-offset-2">
+        <h1>{{ title }}</h1>
+        {% for post in posts %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="thumbnail">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" class="img-responsive"/>
+                        {% endif %}
+                        <div class="caption">
+                            <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                <small>{{ post.publication_date|timesince }} ago</small></h3>
+                            {% if post.draft %}<span style="color: red;">Draft</span>{% endif %}
+                            <p>Author: {% if post.user.get_full_name %}{{ post.user.get_full_name }}{% else %}{{ post.user }}{% endif %}</p>
+                            <p>{{ post.content|linebreaks|truncatechars:120 }}</p>
+                            <p>
+                                <a href="{{ post.get_absolute_url }}" class="btn btn-primary" role="button">View</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page={{ posts.previous_page_number }}">Previous</a>
+        {% endif %}
+    </span>
+            <span class="current">
+                {% if posts.paginator.num_pages != 1 %}
+        Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                {% endif %}
+    </span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

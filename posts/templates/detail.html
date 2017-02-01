@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+    <div class="col-sm-8 col-sm-offset-2">
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="img-responsive"/>
+        {% endif %}
+
+        <h2>{{ title }} <small>{{ post.publication_date|timesince }}</small></h2>
+        {% if post.draft %}<span style="color: red;">Draft</span>{% endif %}
+
+        <p>Author: {% if post.user.get_full_name %}{{ post.user.get_full_name }}{% else %}{{ post.user }}{% endif %}</p>
+
+        {% block social_linkds %}{% include 'blocks/social_links.html' %}{% endblock %}
+
+        <p>{{ post.content|linebreaks }}</p>
+    </div>
+{% endblock %}
