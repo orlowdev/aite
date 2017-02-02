@@ -21,7 +21,7 @@
                                 <small>{{ post.publication_date|timesince }} ago</small></h3>
                             {% if post.draft %}<span style="color: red;">Draft</span>{% endif %}
                             <p>Author: {% if post.user.get_full_name %}{{ post.user.get_full_name }}{% else %}{{ post.user }}{% endif %}</p>
-                            <p>{{ post.content|linebreaks|truncatechars:120 }}</p>
+                            <div class="content-markdown">{{ post.content|truncatechars:120 }}</div>
                             <p>
                                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary" role="button">View</a>
                             </p>
