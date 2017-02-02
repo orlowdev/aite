@@ -3,8 +3,9 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
-
+from markdown_deux import markdown
 
 # Blog post model manager
 class PostManager(models.Manager):
@@ -69,6 +70,10 @@ class Post(models.Model):
     """ Return absolute url based on slug """
     def get_absolute_url(self):
         return reverse("posts:detail", kwargs={"slug": self.slug})
+
+    """ Return markdown shrunk for post list view """
+    def get_markdown(self):
+        return mark_safe(markdown(self.content))
 
     class Meta:
         ordering = [

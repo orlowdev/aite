@@ -4,7 +4,7 @@ $(document).ready(function () {
         let markedContent = marked(content);
         $(this).html(markedContent);
     });
-    $(".content-markdown img").each(function () {
+    $(".post-detail-content img").each(function () {
         $(this).addClass("img-responsive");
     })
 });

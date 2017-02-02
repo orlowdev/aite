@@ -16,12 +16,12 @@
                         {% if post.image %}
                             <img src="{{ post.image.url }}" class="img-responsive"/>
                         {% endif %}
-                        <div class="caption">
+                        <div class="caption post-detail-content">
                             <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                                 <small>{{ post.publication_date|timesince }} ago</small></h3>
                             {% if post.draft %}<span style="color: red;">Draft</span>{% endif %}
                             <p>Author: {% if post.user.get_full_name %}{{ post.user.get_full_name }}{% else %}{{ post.user }}{% endif %}</p>
-                            <div class="content-markdown">{{ post.content|truncatechars:120 }}</div>
+                            <div class="">{{ post.get_markdown }}</div>
                             <p>
                                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary" role="button">View</a>
                             </p>
