@@ -6,6 +6,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
+from comments.forms import CommentForm
 from comments.models import Comment
 
 from . import options
@@ -54,8 +55,28 @@ def post_detail(request, slug=None):
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
 
+    """ Provide initial data to hidden fields of the form via 'initial' """
+    form = CommentForm(request.POST or None, initial={
+        'content_type': post.get_content_type,
+        'object_id': post.id,
+    })
+
+    if form.is_valid():
+        c_type = form.cleaned_data.get("content_type")
+        content_type = ContentType.objects.get(model=c_type)
+        obj_id = form.cleaned_data.get("object_id")
+        content = form.cleaned_data.get("content")
+        new_comment, created = Comment.objects.get_or_create(
+            user=request.user,
+            content_type=content_type,
+            object_id=obj_id,
+            content=content,
+        )
+
+
     return render(request, "detail.html", {
         "post": post,
+        "form": form,
     })
 
 
