@@ -7,6 +7,9 @@ from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 from markdown_deux import markdown
 
+from comments.models import Comment
+
+
 # Blog post model manager
 class PostManager(models.Manager):
     def visible(self, *args, **kwargs):
@@ -81,6 +84,10 @@ class Post(models.Model):
             "-updated_at",
             "title",
         ]
+
+    @property
+    def comments(self):
+        return Comment.objects.filter_by_instance(self)
 
 
 # Advanced slug builder

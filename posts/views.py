@@ -54,14 +54,8 @@ def post_detail(request, slug=None):
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
 
-    """ Get content type and object id to pass to comments filter """
-    content_type = ContentType.objects.get_for_model(Post)
-    object_id = post.id
-    comments = Comment.objects.filter(content_type=content_type, object_id=object_id)
-
     return render(request, "detail.html", {
         "post": post,
-        "comments": comments,
     })
 
 

@@ -23,14 +23,14 @@
 
         <div>
             <p class="lead">Comments:</p>
-            {% for comment in comments %}
-                <div class="">
-                    {{ comment.content }}
-                <br/>
-                    <small>via {{ comment.user }} | {{ comment.created_at|timesince }} ago</small>
+            <hr/>
+            {% for comment in post.comments %}
+                <blockquote>
+                    <p>{{ comment.content }}</p>
+                    <footer>via {{ comment.user }} | <cite title="">{{ comment.created_at|timesince }} ago</cite> </footer>
+                </blockquote>
                 <hr/>
                 </div>
             {% endfor %}
-        </div>
     </div>
 {% endblock %}
