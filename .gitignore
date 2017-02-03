@@ -221,3 +221,4 @@ fabric.properties
 /.idea/dictionaries/zumazu.xml
 /.idea/dataSources/32f11de1-0edc-42ca-b723-4ff82ab97c53.xml
 /.idea/dataSources/32f11de1-0edc-42ca-b723-4ff82ab97c53/storage.xml
+/comments/migrations/

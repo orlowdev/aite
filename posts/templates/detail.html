@@ -16,5 +16,9 @@
         {% block social_links %}{% include 'blocks/social_links.html' %}{% endblock %}
 
         <div class="col-sm-12 post-detail-content">{{ post.get_markdown }}</div>
+
+        <div>
+            {{ post.comment_set.all }}
+        </div>
     </div>
 {% endblock %}
