@@ -5,10 +5,15 @@
 {% block body %}
     <div class="col-sm-8 col-sm-offset-2">
         <h1>{{ title }}</h1>
-    <form method="GET" action="">
-        <input type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}"/>
-        <input type="submit" value="Search"/>
-    </form>
+        <form method="GET" action="" class="row">
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}"/>
+                    <span class="input-group-btn">
+        <input class="btn btn-default" type="submit" value="Search"/></span>
+                </div>
+            </div>
+        </form><br/>
         {% for post in posts %}
             <div class="row">
                 <div class="col-sm-12">
@@ -38,7 +43,7 @@
     </span>
             <span class="current">
                 {% if posts.paginator.num_pages != 1 %}
-        Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
                 {% endif %}
     </span>
 
