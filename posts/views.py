@@ -73,6 +73,8 @@ def post_detail(request, slug=None):
             content=content,
         )
 
+        return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
+
 
     return render(request, "detail.html", {
         "post": post,
