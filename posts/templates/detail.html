@@ -33,12 +33,31 @@
             {% for comment in post.comments %}
                 <blockquote>
                     <p>{{ comment.content }}</p>
-                    <footer>via {{ comment.user }} | <cite title="">{{ comment.created_at|timesince }} ago</cite> </footer>
-                    <form method="POST" action=".">{% csrf_token %}
-                        {{ form|crispy }}
-                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                        <input type="submit" value="Reply" class="btn btn-default">
-                    </form>
+                    <footer>
+                        via {{ comment.user }} | <cite title="">{{ comment.created_at|timesince }} ago</cite> |
+                        {% if comment.children.count > 0 %}
+                            {{ comment.children|length }}
+                            {{ comment.children|length|pluralize:"comment,comments" }}{% endif %}
+                        <a href="#" class="comment-reply-btn">Reply</a>
+                    </footer>
+
+                    <div class="comment-reply">
+                        {% for reply in comment.children %}
+                            <blockquote>
+                                <p>{{ reply.content }}</p>
+                                <footer>
+                                    via {{ reply.user }} | <cite title="">{{ reply.created_at|timesince }} ago</cite>
+                                </footer>
+                            </blockquote>
+                        {% endfor %}
+
+                        <form method="POST" action=".">{% csrf_token %}
+                            {{ form|crispy }}
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                            <input type="submit" value="Reply" class="btn btn-default">
+                        </form>
+                    </div>
+
                 </blockquote>
                 <hr/>
 

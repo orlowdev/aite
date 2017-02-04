@@ -5,12 +5,14 @@ from django.contrib.contenttypes.models import ContentType
 
 
 class CommentManager(models.Manager):
+    """ Override default query to ignore """
+    def all(self):
+        return super(CommentManager, self).filter(parent=None)
+
     def filter_by_instance(self, instance):
         content_type = ContentType.objects.get_for_model(instance.__class__)
         object_id = instance.id
-        queryset = super(CommentManager, self).filter(content_type=content_type, object_id=object_id)
-
-        return queryset
+        return super(CommentManager, self).filter(content_type=content_type, object_id=object_id).filter(parent=None)
 
 
 class Comment(models.Model):
@@ -27,7 +29,7 @@ class Comment(models.Model):
     objects = CommentManager()
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_at',]
 
     def __str__(self):
         return str(self.user.username)

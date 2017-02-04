@@ -69,7 +69,7 @@ def post_detail(request, slug=None):
         parent_object = None
         try:
             parent_id = int(request.POST.get("parent_id"))
-        except ValueError:
+        except:
             parent_id = None
 
         if parent_id:
@@ -82,9 +82,10 @@ def post_detail(request, slug=None):
             content_type=content_type,
             object_id=obj_id,
             content=content,
-            parent_id=parent_object,
+            parent=parent_object,
         )
 
+        """ Reload the same page to clean up the input field """
         return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 
     return render(request, "detail.html", {
