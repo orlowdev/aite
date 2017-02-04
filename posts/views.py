@@ -12,6 +12,7 @@ from comments.models import Comment
 from . import options
 from .forms import PostForm
 from .models import Post
+from .utils import get_read_time
 
 
 # Post list view
@@ -54,6 +55,8 @@ def post_detail(request, slug=None):
     if post.draft or post.publication_date > timezone.now().date():
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
+
+    print(get_read_time(post.get_markdown()))
 
     """ Provide initial data to hidden fields of the form via 'initial' """
     form = CommentForm(request.POST or None, initial={
