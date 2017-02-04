@@ -10,6 +10,7 @@ from django.utils.text import slugify
 from markdown_deux import markdown
 
 from comments.models import Comment
+from .utils import get_read_time
 
 
 # Blog post model manager
@@ -43,6 +44,7 @@ class Post(models.Model):
         auto_now_add=False,
         null=True,
     )
+    read_time = models.IntegerField(default=0)  # assume minutes
     image = models.ImageField(
         upload_to=upload_location,
         width_field="width_field",
@@ -110,9 +112,11 @@ def create_slug(instance, new_slug=None):
     return slug
 
 
-# Pre-persist slug check
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
+
+    if instance.content:
+        instance.read_time = get_read_time(instance.get_markdown())
 
 pre_save.connect(pre_save_post_receiver, sender=Post)

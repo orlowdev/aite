@@ -10,8 +10,11 @@
             <img src="{{ post.image.url }}" class="img-responsive"/>
         {% endif %}
 
-        <h2>{{ title }} <small>{{ post.publication_date|timesince }}</small></h2>
+        <h1>{{ post.title }} <small>{{ post.publication_date|timesince }}</small></h1>
         {% if post.draft %}<span style="color: red;">Draft</span>{% endif %}
+
+        <p>Read time: {{ post.read_time }} {{ post.read_time|pluralize:"minute,minutes" }}
+        </p>
 
         <p>Author: {% if post.user.get_full_name %}{{ post.user.get_full_name }}{% else %}{{ post.user }}{% endif %}</p>
 
