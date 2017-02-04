@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'pagedown',
 
     # Inner
+    'accounts.apps.AccountsConfig',
     'comments.apps.CommentsConfig',
     'posts.apps.PostsConfig',
 ]
