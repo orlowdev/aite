@@ -24,6 +24,7 @@
       <list>
         <option value="$MODULE_DIR$/templates" />
         <option value="$MODULE_DIR$/posts/templates" />
+        <option value="$MODULE_DIR$/comments/templates" />
       </list>
     </option>
   </component>

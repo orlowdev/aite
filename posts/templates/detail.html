@@ -38,7 +38,7 @@
                         {% if comment.children.count > 0 %}
                             {{ comment.children|length }}
                             {{ comment.children|length|pluralize:"comment,comments" }}{% endif %}
-                        <a href="#" class="comment-reply-btn">Reply</a>
+                        <a href="#" class="comment-reply-btn">Reply</a> | <a href="{{ comment.get_absolute_url }}">Thread</a>
                     </footer>
 
                     <div class="comment-reply">

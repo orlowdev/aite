@@ -24,6 +24,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^admin/', admin.site.urls),
+    url(r'^comments/', include("comments.urls", namespace="comments")),
     url(r'^posts/', include("posts.urls", namespace="posts")),
 ]
 

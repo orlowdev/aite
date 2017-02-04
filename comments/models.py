@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.urls import reverse
 
 
 class CommentManager(models.Manager):
@@ -36,6 +37,9 @@ class Comment(models.Model):
 
     def children(self):  # replies
         return Comment.objects.filter(parent=self)
+
+    def get_absolute_url(self):
+        return reverse("comments:thread", kwargs={"pk": self.pk})
 
     @property
     def is_parent(self):
