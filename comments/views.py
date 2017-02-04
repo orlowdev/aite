@@ -7,6 +7,19 @@ from .models import Comment
 from .forms import CommentForm
 
 
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == 'POST':
+        messages.success(request, "Comment successfully deleted")
+        comment.delete()
+
+        return HttpResponseRedirect(comment.content_object.get_absolute_url())
+
+    return render(request, "delete.html", {
+        "comment": comment,
+    })
+
+
 def comment_thread(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     initial_data = {
@@ -47,7 +60,3 @@ def comment_thread(request, pk):
         "comment": comment,
         "form": form,
     })
-
-
-def comment_delete(request):
-    pass
