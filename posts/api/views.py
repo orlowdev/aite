@@ -1,9 +1,9 @@
 from rest_framework.generics import ListAPIView
 
 from posts.models import Post
+from posts.api.serializers import PostSerializer
 
 
 class PostListAPIView(ListAPIView):
-    posts = Post.objects.all()
-
-    # TODO: Add serializer
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
