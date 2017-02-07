@@ -28,10 +28,14 @@
 
         <div>
             <p class="lead">Comments:</p>
-        <form method="POST" action=".">{% csrf_token %}
-            {{ form|crispy }}
-            <input type="submit" value="Post comment" class="btn btn-default">
-        </form>
+            {% if request.user.is_authenticated %}
+                <form method="POST" action=".">{% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" value="Post comment" class="btn btn-default">
+                </form>
+            {% else %}
+                <p>Only logged in users can write comments</p>
+            {% endif %}
             <hr/>
             {% for comment in post.comments %}
                 <blockquote>
@@ -53,12 +57,15 @@
                                 </footer>
                             </blockquote>
                         {% endfor %}
-
-                        <form method="POST" action=".">{% csrf_token %}
-                            {{ form|crispy }}
-                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                            <input type="submit" value="Reply" class="btn btn-default">
-                        </form>
+                        {% if request.user.is_authenticated %}
+                            <form method="POST" action=".">{% csrf_token %}
+                                {{ form|crispy }}
+                                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                <input type="submit" value="Reply" class="btn btn-default">
+                            </form>
+                        {% else %}
+                            <p>Only logged in users can write comments</p>
+                        {% endif %}
                     </div>
 
                 </blockquote>
