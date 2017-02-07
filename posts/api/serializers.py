@@ -7,6 +7,8 @@ class PostSerializer(ModelSerializer):
     class Meta:
         model = Post
         fields = [
+            "pk",
+            "publication_date",
             "title",
             "slug",
             "content",
