@@ -1,8 +1,22 @@
-from django.db import models
-from django.urls import reverse
-from django.db.models.signals import pre_save
-from django.utils.text import slugify
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.db import models
+from django.db.models.signals import pre_save
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.safestring import mark_safe
+from django.utils.text import slugify
+
+from markdown_deux import markdown
+
+from comments.models import Comment
+from .utils import get_read_time
+
+
+# Blog post model manager
+class PostManager(models.Manager):
+    def visible(self, *args, **kwargs):
+        return super(PostManager, self).filter(draft=False).filter(publication_date__lte=timezone.now())
 
 
 # Upload location definition for user files
@@ -30,6 +44,7 @@ class Post(models.Model):
         auto_now_add=False,
         null=True,
     )
+    read_time = models.IntegerField(default=0)  # assume minutes
     image = models.ImageField(
         upload_to=upload_location,
         width_field="width_field",
@@ -51,6 +66,11 @@ class Post(models.Model):
         auto_now=True
     )
 
+    """ Model manager injection
+    'objects' is a conventional name yet it may be overriden
+    In this case all references must be Post.'new_name'.* """
+    objects = PostManager()
+
     def __str__(self):
         return self.title
 
@@ -58,12 +78,25 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("posts:detail", kwargs={"slug": self.slug})
 
+    """ Return markdown shrunk for post list view """
+    def get_markdown(self):
+        return mark_safe(markdown(self.content))
+
     class Meta:
         ordering = [
             "-created_at",
             "-updated_at",
             "title",
         ]
+
+    @property
+    def comments(self):
+        return Comment.objects.filter_by_instance(self)
+
+    @property
+    def get_content_type(self):
+        content_type = ContentType.objects.get_for_model(self.__class__)
+        return content_type
 
 
 # Advanced slug builder
@@ -79,9 +112,11 @@ def create_slug(instance, new_slug=None):
     return slug
 
 
-# Pre-persist slug check
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
+
+    if instance.content:
+        instance.read_time = get_read_time(instance.get_markdown())
 
 pre_save.connect(pre_save_post_receiver, sender=Post)

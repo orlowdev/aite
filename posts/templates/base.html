@@ -3,20 +3,50 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
 
-    {% block meta %}{% include 'blocks/meta.html' %}{% endblock %}
+    {% block meta %}
+        {% include 'blocks/meta.html' %}
+    {% endblock %}
 
-    {% block stylesheets %}{% include 'blocks/stylesheets.html' %}{% endblock %}
+    {% block stylesheets %}
+        {% include 'blocks/stylesheets.html' %}
+    {% endblock %}
 
     {% block header_js %}{% endblock %}
+
+    {% block head_bottom %}{% endblock %}
 </head>
 
-<body>
+<body class="form-page">
+<ol class="breadcrumb">
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'posts:list' %}">Posts</a></li>
+
+    {% block post_detail_link %}{% endblock %}
+    {% if not request.user.is_authenticated %}
+        <li class="pull-right"><a href="{% url 'login' %}">Login</a></li>
+        <li class="pull-right"><a href="{% url 'register' %}">Register</a></li>
+    {% else %}
+        <li class="pull-right"><a href="{% url 'logout' %}">Logout</a></li>
+    {% endif %}
+</ol>
 <div class="container">
-{% block messages %}{% include 'blocks/messages.html' %}{% endblock %}
-{% block header %}{% endblock %}
-{% block body %}{% endblock %}
-{% block footer %}{% endblock %}
+
+
+    {% block messages %}
+        {% include 'blocks/messages.html' %}
+    {% endblock %}
+
+    {% block header %}{% endblock %}
+
+    {% block body %}{% endblock %}
+
+    {% block footer %}{% endblock %}
+
 </div>
-{% block footer_js %}{% include 'blocks/footer_js.html' %}{% endblock %}
+
+{% block footer_js %}
+    {% include 'blocks/footer_js.html' %}
+{% endblock %}
+
 </body>
 </html>

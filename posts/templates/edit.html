@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
+{% block head_bottom %}
+    {{ form.media }}
+{% endblock %}
+
 {% block body %}
-    <h1>Form</h1>
-    <form method="POST" action="" enctype="multipart/form-data">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input type="submit" value="Edit post"/>
-    </form>
+
+    {% block form %}
+        {% include 'blocks/edit_form.html' %}
+    {% endblock %}
+
 {% endblock %}
