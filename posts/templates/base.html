@@ -17,7 +17,20 @@
 </head>
 
 <body class="form-page">
+<ol class="breadcrumb">
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'posts:list' %}">Posts</a></li>
+
+    {% block post_detail_link %}{% endblock %}
+
+    <li class="pull-right"><a href="{% url 'login' %}">Login</a></li>
+    <li class="pull-right"><a href="{% url 'register' %}">Register</a></li>
+    {% if request.user.is_authenticated %}
+    <li class="pull-right"><a href="{% url 'logout' %}">Logout</a></li>
+    {% endif %}
+</ol>
 <div class="container">
+
 
     {% block messages %}
         {% include 'blocks/messages.html' %}
