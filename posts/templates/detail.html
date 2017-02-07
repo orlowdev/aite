@@ -4,6 +4,10 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 
+{% block post_detail_link %}
+    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+{% endblock %}
+
 {% block body %}
     <div class="col-sm-8 col-sm-offset-2">
         {% if post.image %}
