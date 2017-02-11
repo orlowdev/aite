@@ -6,27 +6,21 @@ from rest_framework.serializers import ModelSerializer
 from posts.models import Post
 
 
-# Provides serialized Post list data
-class PostListSerializer(ModelSerializer):
-    """
-    Returns primary key, date of publication, title, content and slug
-    """
+# Provides serialized Post creation
+class PostCreateUpdateSerializer(ModelSerializer):
 
     class Meta:
         model = Post
         fields = [
-            "id",
             "publication_date",
-            "slug",
             "title",
+            "content",
+            "draft",
         ]
 
 
 # Provides serialized single Post data
 class PostDetailSerializer(ModelSerializer):
-    """
-    Returns primary key, date of publication, title, content and slug
-    """
 
     class Meta:
         model = Post
@@ -36,4 +30,18 @@ class PostDetailSerializer(ModelSerializer):
             "slug",
             "title",
             "content",
+        ]
+
+
+# Provides serialized Post list data
+class PostListSerializer(ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = [
+            "id",
+            "user",
+            "publication_date",
+            "slug",
+            "title",
         ]
