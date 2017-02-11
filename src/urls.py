@@ -25,9 +25,10 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^admin/', admin.site.urls),
+    url(r'^api/posts/', include("posts.api.urls", namespace="api-posts")),
+    url(r'^api/comments/', include("comments.api.urls", namespace="api-comments")),
     url(r'^comments/', include("comments.urls", namespace="comments")),
     url(r'^posts/', include("posts.urls", namespace="posts")),
-    url(r'^api/posts/', include("posts.api.urls", namespace="api-posts")),
     url(r'^login/$', login_view, name="login"),
     url(r'^register/$', register_view, name="register"),
     url(r'^logout/$', logout_view, name="logout"),
