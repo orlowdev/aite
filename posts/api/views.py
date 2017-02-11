@@ -21,7 +21,6 @@ from posts.api.serializers import (
     PostListSerializer,
 )
 from posts.api.pagination import (
-    PostLimitOffsetPagination,
     PostPageNumberPagination,
 )
 from posts.models import Post
