@@ -22,6 +22,7 @@ from posts.api.pagination import (
 from comments.models import Comment
 from comments.api.serializers import (
     CommentSerializer,
+    CommentDetailSerializer,
 )
 
 
@@ -36,7 +37,7 @@ from comments.api.serializers import (
 
 class CommentDetailAPIView(RetrieveAPIView):
     queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    serializer_class = CommentDetailSerializer
 
 
 # class PostUpdateAPIView(RetrieveUpdateAPIView):
