@@ -2,8 +2,9 @@
 Serializer class for Post model
 """
 from rest_framework.serializers import (
-    ModelSerializer,
     HyperlinkedIdentityField,
+    ModelSerializer,
+    SerializerMethodField,
 )
 
 from posts.models import Post
@@ -34,24 +35,45 @@ class PostCreateUpdateSerializer(ModelSerializer):
 
 # Provides serialized single Post data
 class PostDetailSerializer(ModelSerializer):
-    url = post_detail_url
     delete_url = post_delete_url
+    url = post_detail_url
+
+    html = SerializerMethodField()
+    image = SerializerMethodField()
+    user = SerializerMethodField()
 
     class Meta:
         model = Post
         fields = [
             "id",
             "url",
+            "user",
             "publication_date",
+            "image",
             "title",
             "content",
+            "html",
             "delete_url",
         ]
+
+    def get_html(self, obj):
+        return obj.get_markdown()
+
+    def get_image(self, obj):
+        try:
+            image = obj.image.url
+        except:
+            image = None
+        return image
+
+    def get_user(self, obj):
+        return str(obj.user.username)
 
 
 # Provides serialized Post list data
 class PostListSerializer(ModelSerializer):
     url = post_detail_url
+    user = SerializerMethodField()
 
     class Meta:
         model = Post
@@ -62,3 +84,6 @@ class PostListSerializer(ModelSerializer):
             "publication_date",
             "title",
         ]
+
+    def get_user(self, obj):
+        return str(obj.user.username)
