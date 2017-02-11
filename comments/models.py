@@ -18,6 +18,26 @@ class CommentManager(models.Manager):
         object_id = instance.id
         return super(CommentManager, self).filter(content_type=content_type, object_id=object_id).filter(parent=None)
 
+    def create_by_model_type(self, model_type, slug, content, user, parent_obj=None):
+        model_qs = ContentType.objects.filter(model=model_type)
+        if model_qs.exists():
+            SomeModel = model_qs.first().model_class()
+            obj_qs = SomeModel.objects.filter(slug=slug)
+            if obj_qs.exists():
+                instance = self.model()
+                instance.content = content
+                instance.user = user
+                instance.content_type =model_qs.first()
+                instance.object_id = obj_qs.first().id
+                if parent_obj:
+                    instance.parent = parent_obj
+
+                instance.save()
+
+                return instance
+
+        return None
+
 
 # Comment Model
 class Comment(models.Model):
