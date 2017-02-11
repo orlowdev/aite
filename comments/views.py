@@ -1,12 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 
-from .models import Comment
 from .forms import CommentForm
+from .models import Comment
 
 
 @login_required
@@ -73,7 +72,9 @@ def comment_thread(request, pk):
         )
 
         """ Reload the same page to clean up the input field """
-        return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
+        return HttpResponseRedirect(
+            new_comment.content_object.get_absolute_url()
+        )
 
     return render(request, "thread.html", {
         "comment": comment,
