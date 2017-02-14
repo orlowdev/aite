@@ -17,6 +17,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from rest_framework_jwt.views import obtain_jwt_token
 
 from accounts.views import login_view, logout_view, register_view
 
@@ -25,6 +26,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^admin/', admin.site.urls),
+    url(r'^api/auth/token', obtain_jwt_token),
     url(r'^api/posts/', include("posts.api.urls", namespace="api-posts")),
     url(r'^api/comments/', include("comments.api.urls", namespace="api-comments")),
     url(r'^api/users/', include("accounts.api.urls", namespace="api-users")),

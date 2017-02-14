@@ -14,7 +14,7 @@ from rest_framework.mixins import (
 )
 from rest_framework.permissions import (
     IsAuthenticated,
-)
+    AllowAny)
 
 from posts.api.pagination import (
     PostPageNumberPagination,
@@ -31,7 +31,6 @@ from comments.api.serializers import (
 
 class CommentCreateAPIView(CreateAPIView):
     queryset = Comment.objects.all()
-    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         model_type = self.request.GET.get("type")
@@ -63,25 +62,9 @@ class CommentEditAPIView(DestroyModelMixin, UpdateModelMixin, RetrieveAPIView):
         return self.destroy(request, *args, **kwargs)
 
 
-# class PostUpdateAPIView(RetrieveUpdateAPIView):
-#     queryset = Post.objects.all()
-#     serializer_class = PostCreateUpdateSerializer
-#     lookup_field = 'slug'
-#     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-#
-#     def perform_update(self, serializer):
-#         serializer.save(user=self.request.user)
-
-
-# class PostDeleteAPIView(DestroyAPIView):
-#     queryset = Post.objects.all()
-#     serializer_class = PostDetailSerializer
-#     lookup_field = 'slug'
-#     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
-
 class CommentListAPIView(ListAPIView):
     serializer_class = CommentSerializer
+    permission_classes = [AllowAny]
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = [
         'content',

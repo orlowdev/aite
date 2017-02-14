@@ -4,6 +4,7 @@ from rest_framework.serializers import (
     SerializerMethodField,
 )
 
+from accounts.api.serializers import UserDetailSerializer
 from comments.api.serializers import CommentSerializer
 from comments.models import Comment
 
@@ -40,7 +41,7 @@ class PostDetailSerializer(ModelSerializer):
 
     html = SerializerMethodField()
     image = SerializerMethodField()
-    user = SerializerMethodField()
+    user = UserDetailSerializer(read_only=True)
 
     comments = SerializerMethodField()
 
@@ -69,9 +70,6 @@ class PostDetailSerializer(ModelSerializer):
             image = None
         return image
 
-    def get_user(self, obj):
-        return str(obj.user.username)
-
     def get_comments(self, obj):
         c_qs = Comment.objects.filter_by_instance(obj)
         comments = CommentSerializer(c_qs, many=True).data
@@ -82,7 +80,7 @@ class PostDetailSerializer(ModelSerializer):
 # Provides serialized Post list data
 class PostListSerializer(ModelSerializer):
     url = post_detail_url
-    user = SerializerMethodField()
+    user = UserDetailSerializer(read_only=True)
 
     class Meta:
         model = Post
@@ -93,6 +91,3 @@ class PostListSerializer(ModelSerializer):
             "publication_date",
             "title",
         ]
-
-    def get_user(self, obj):
-        return str(obj.user.username)
