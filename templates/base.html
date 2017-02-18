@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+
+    {% block meta %}
+        {% include 'blocks/meta.html' %}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {% include 'blocks/stylesheets.html' %}
+    {% endblock %}
+
+    {% block header_js %}
+    {% endblock %}
+
+    {% block head_bottom %}
+    {% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}" {% block body_attributes %}{% endblock %}>
+
+{% block body %}
+
+    {% block messages %}
+        {% include 'blocks/messages.html' %}
+    {% endblock %}
+
+    {% block navigation %}
+    {% endblock %}
+
+    {% block header %}
+    {% endblock %}
+
+    {% block main %}
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+
+{% endblock %}
+
+
+{% block footer_js %}
+    {% include 'blocks/footer_js.html' %}
+{% endblock %}
+
+</body>
+</html>

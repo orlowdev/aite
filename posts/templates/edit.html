@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'base_posts.html' %}
 
 {% block head_bottom %}
     {{ form.media }}
 {% endblock %}
 
-{% block body %}
+{% block main %}
 
     {% block form %}
         {% include 'blocks/edit_form.html' %}
