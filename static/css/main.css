@@ -12,3 +12,11 @@ h1 {
 .comment-reply {
     display: none;
 }
+
+#page-content {
+    margin-top: 70px !important;
+}
+
+.navigation {
+    background-color: rgba(0, 0, 0, 0.8); !important;
+}
