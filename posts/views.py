@@ -112,7 +112,7 @@ def post_create(request):
     else:
         messages.error(request, "Not successfully created")
 
-    return render(request, "create.html", {
+    return render(request, "edit.html", {
         "form": form,
     })
 

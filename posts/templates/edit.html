@@ -1,6 +1,11 @@
 {% extends 'base_posts.html' %}
 
 {% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if post %}{{ post }}{% else %}Create new post{% endif %}
+{% endblock %}
 
 {% block head_bottom %}
     {{ form.media }}
@@ -8,9 +13,22 @@
 
 {% block main %}
 
-    {% block form %}
-        {% include 'blocks/edit_form.html' %}
-    {% endblock %}
+
+    <div class="col-sm-6">
+        <h1>Preview</h1>
+        <div class="content-preview">
+            <h3 id="preview-title"></h3>
+            <p id="preview-content"></p>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h1>Form</h1>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form|crispy }}
+            {% csrf_token %}
+            <input type="submit" value="Save"/>
+        </form>
+    </div>
 
 {% endblock %}
 
