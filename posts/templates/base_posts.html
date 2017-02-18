@@ -48,12 +48,12 @@
     </header>
     <div id="page-content">
     {% block breadcrumbs %}
+
     <ol class="breadcrumb">
         <li><a href="{% url 'index' %}">Home</a></li>
         <li><a href="{% url 'posts:list' %}">Posts</a></li>
 
         {% block post_detail_link %}{% endblock %}
-
 
     </ol>
 

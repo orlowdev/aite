@@ -3,18 +3,15 @@
 {% block title %}Totemish Blog{% endblock %}
 
 {% block main %}
+    <form method="GET" action="" class="row" style="margin-top: -20px">
+            <div class="col-sm-12">
+                <input class="form-control" type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}"/>
+            </div>
+        </form><br/>
     <div class="container">
     <div class="col-sm-8 col-sm-offset-2">
         <h1>{{ title }}</h1>
-        <form method="GET" action="" class="row">
-            <div class="col-sm-6">
-                <div class="input-group">
-                    <input class="form-control" type="text" name="q" placeholder="Search posts" value="{{ request.GET.q }}"/>
-                    <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
-                </div>
-            </div>
-        </form><br/>
+
         {% for post in posts %}
             <div class="row">
                 <div class="col-sm-12">
