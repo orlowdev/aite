@@ -5,7 +5,12 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 
-{% block body %}
+{% block post_detail_link %}
+    {% comment %}TODO: Add post breadcrumb link{% endcomment %}
+    <li><a href="{{ comment.get_absolute_url }}">{{ comment.created_at }}</a></li>
+{% endblock %}
+
+{% block main %}
 
     {{ comment }}
     <div class="col-sm-8 col-sm-offset-2">
