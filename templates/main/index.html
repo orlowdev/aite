@@ -540,6 +540,7 @@
                     <div class="container">
                         <h2>From the blog.</h2>
                         <div class="row">
+
                             {% for post in posts %}
                                 <div class="col-md-4 col-sm-4">
                                     <div class="blog-item" data-scroll-reveal="enter left and move 20px">
@@ -554,7 +555,7 @@
                                         <p>
                                             {{ post.content|truncatewords:15 }}
                                         </p>
-                                        <a href="{{ post.get_absolute_url }}" class="btn btn-rounded btn-primary arrow">Read More</a>
+                                        <a href="" class="btn btn-rounded btn-primary">Read More</a>
                                     </div>
                                     <!--end blog-item-->
                                 </div>
@@ -574,7 +575,8 @@
         {% block footer %}
             <footer id="page-footer" class="block background-is-dark">
                 <div class="container">
-                    <a href="#" class="brand"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                    <a href="/" class="brand" style="font-size: 3rem;">aite</a>
+
                     <!--end brand-->
                     <div class="contact map" id="contact">
                         <div class="row">
@@ -671,6 +673,83 @@
 
     </div>
     <!--end page-wrapper-->
+{% endblock %}
+
+{% block modals %}
+    <div class="modal fade apartment-selector" id="floor-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="icon_close"></i></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="title">
+                    <h4>Building A</h4>
+                    <h3>Floor 3</h3>
+                    <h1 class="modal-title">Apartment 01</h1>
+                    <h2>$69,000</h2>
+                </div>
+            </div>
+            <!--end modal-header-->
+            <div class="modal-body">
+                <div class="left">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#modal-floor-plan-1" aria-controls="modal-floor-plan-1" role="tab" data-toggle="tab">Floor plan</a></li>
+                        <li role="presentation"><a href="#modal-gallery-1" aria-controls="modal-gallery-1" role="tab" data-toggle="tab">Gallery</a></li>
+                    </ul>
+                    <!--end nav-tabs-->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="modal-floor-plan-1">
+                            <a href="assets/img/floor-plan.jpg" class="image-popup"><img src="assets/img/floor-plan.jpg" alt=""></a>
+                            <div class="note">Click to zoom</div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="modal-gallery-1">
+                            <div class="gallery">
+                                <div class="one-item-carousel" data-owl-items="1" data-owl-margin="0" data-owl-nav="0" data-owl-dots="1">
+                                    <img src="assets/img/gallery-01.jpg" alt="">
+                                    <img src="assets/img/image-video.jpg" alt="">
+                                    <img src="assets/img/gallery-02.jpg" alt="">
+                                </div>
+                            </div>
+                            <!--end gallery-->
+                            <a href="http://vimeo.com/24506451" class="video-tour video-popup"><i class="play-icon arrow_triangle-right"></i>Click to take a video tour</a>
+                        </div>
+                    </div>
+                    <!--end tab-content-->
+                </div>
+                <!--end left-->
+                <div class="right">
+                    <h3>Parameters</h3>
+                    <dl>
+                        <dt>Kitchen</dt>
+                        <dd>24m<sup>2</sup></dd>
+                        <dt>Master bedroom</dt>
+                        <dd>58m<sup>2</sup></dd>
+                        <dt>Balcony</dt>
+                        <dd>67m<sup>2</sup></dd>
+                        <dt>Toilet</dt>
+                        <dd>20m<sup>2</sup></dd>
+                        <dt>Living room</dt>
+                        <dd>77m<sup>2</sup></dd>
+                        <dt>Passage</dt>
+                        <dd>48m<sup>2</sup></dd>
+                    </dl>
+                    <h3>Description</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vehicula mauris at finibus efficitur.
+                        Nulla facilisi. Proin sodales nibh id consequat mattis. Phasellus eu consequat nunc.
+                    </p>
+                    <hr>
+                    <figure><a href="#" class="icon"><i class="fa fa-file-pdf-o"></i>Download PDF</a></figure>
+                    <figure><a href="#" class="icon"><i class="fa fa-file-image-o"></i>Download Brochure</a></figure>
+                </div>
+                <!--end right-->
+            </div>
+            <!--end modal-body-->
+        </div>
+        <!--end modal-content-->
+    </div>
+    <!--end modal-dialog-->
+</div>
+<!--end modal-->
 {% endblock %}
 
 {% block footer_js %}
