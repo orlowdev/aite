@@ -1,5 +1,6 @@
 {% extends 'base_posts.html' %}
 
+{% load staticfiles %}
 {% load crispy_forms_tags %}
 
 {% block title %}{{ post.title }}{% endblock %}
@@ -45,14 +46,14 @@
             {% endif %}
             <hr/>
             {% for comment in post.comments %}
-                <blockquote><small>
+                <blockquote>
                     <p>{{ comment.content }}</p>
                     <footer>
                         via {{ comment.user }} | <cite title="">{{ comment.created_at|timesince }} ago</cite> |
                         {% if comment.children.count > 0 %}
                             {{ comment.children|length }}
                             {{ comment.children|length|pluralize:"comment,comments" }}{% endif %}
-                        <a href="" class="comment-reply-btn">Reply</a> | <a href="{{ comment.get_absolute_url }}">Thread</a>
+                        <a href="#" class="comment-reply-btn">Reply</a> | <a href="{{ comment.get_absolute_url }}">Thread</a>
                     </footer>
 
                     <div class="comment-reply">
@@ -75,10 +76,15 @@
                         {% endif %}
                     </div>
 
-                </small></blockquote>
+                </blockquote>
                 <hr/>
 
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+{% block footer_js %}
+    {{ block.super }}
+    <script src="{% static 'js/replier.js' %}"></script>
 {% endblock %}
