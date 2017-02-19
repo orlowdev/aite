@@ -9,10 +9,13 @@
 {% endblock %}
 
 {% block main %}
-    <div class="col-sm-8 col-sm-offset-2">
-        {% if post.image %}
-            <img src="{{ post.image.url }}" class="img-responsive"/>
+    {% if post.image %}
+        <div class="wide-image" style="background-image: url('{{ post.image.url }}')">
+            <img src="{{ post.image.url }}"/>
+        </div>
         {% endif %}
+    <div class="col-sm-8 col-sm-offset-2">
+
 
         <h1>{{ post.title }} <small>{{ post.publication_date|timesince }}</small></h1>
         {% if post.draft %}<span style="color: red;">Draft</span>{% endif %}
@@ -42,14 +45,14 @@
             {% endif %}
             <hr/>
             {% for comment in post.comments %}
-                <blockquote>
+                <blockquote><small>
                     <p>{{ comment.content }}</p>
                     <footer>
                         via {{ comment.user }} | <cite title="">{{ comment.created_at|timesince }} ago</cite> |
                         {% if comment.children.count > 0 %}
                             {{ comment.children|length }}
                             {{ comment.children|length|pluralize:"comment,comments" }}{% endif %}
-                        <a href="#" class="comment-reply-btn">Reply</a> | <a href="{{ comment.get_absolute_url }}">Thread</a>
+                        <a href="" class="comment-reply-btn">Reply</a> | <a href="{{ comment.get_absolute_url }}">Thread</a>
                     </footer>
 
                     <div class="comment-reply">
@@ -72,7 +75,7 @@
                         {% endif %}
                     </div>
 
-                </blockquote>
+                </small></blockquote>
                 <hr/>
 
             {% endfor %}
