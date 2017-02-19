@@ -1,82 +1,178 @@
 {% extends 'base.html' %}
+
 {% load staticfiles %}
 
 {% block stylesheets %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 {% endblock %}
+
+{% block title %}Blog{% endblock %}
 
 {% block body_class %}has-loading-screen{% endblock %}
 {% block body_attributes %}data-spy="scroll" data-target=".navigation"{% endblock %}
 
 {% block body %}
-<div class="page-wrapper" id="page-top">
-    <header id="page-header">
-    {% block navigation %}
-        <nav class="navigation background-is-dark">
-            <div class="container">
-                <div class="wrapper">
-                    <div class="left">
-                        <!-- TODO: Move hardcoded styles -->
-                        <a href="/" class="brand"><img src="{% static 'img/logo.png' %}" style="margin-right: 20px" alt=""></a>
-                        <a href="/" style="margin-right: 20px">Home</a>
-                        <a href="{% url 'posts:list' %}" style="margin-right: 20px">Blog</a>
 
-                    </div>
-                    <!--end left-->
-                    <div class="right">
-                        <ul class="nav navigation-links animate">
-                            {% if not request.user.is_authenticated %}
-                                <li class="scroll"><a href="{% url 'login' %}">Sign In</a></li>
-                                <li class="scroll"><a href="{% url 'register' %}">Sign Up</a></li>
-                            {% else %}
-                                <li class="scroll"><a href="{% url 'logout' %}">Logout</a></li>
-                            {% endif %}
-                        </ul>
-                        <div class="nav-btn">
-                            <figure></figure>
-                            <figure></figure>
-                            <figure></figure>
+    <div class="page-wrapper" id="page-top">
+        <header id="page-header">
+            {% block navigation %}
+                <nav class="navigation background-is-dark">
+                    <div class="container">
+                        <div class="wrapper">
+                            <div class="left">
+                                <!-- TODO: Move hardcoded styles -->
+                                <a href="/" class="brand" style="font-size: 3rem;">aite</a>
+                            </div>
+                            <!--end left-->
+                            <div class="right">
+                                <ul class="nav navigation-links animate">
+                                    {% if not request.user.is_authenticated %}
+                                        <li><a href="{% url 'login' %}" class="scroll">Sign In</a></li>
+                                        <li><a href="{% url 'register' %}" class="scroll">Sign Up</a></li>
+                                    {% else %}
+                                        <li><a href="{% url 'logout' %}" class="scroll">Logout</a></li>
+                                    {% endif %}
+                                </ul>
+                                <div class="nav-btn">
+                                    <figure></figure>
+                                    <figure></figure>
+                                    <figure></figure>
+                                </div>
+                            </div>
+                            <!--end right-->
                         </div>
                     </div>
-                    <!--end right-->
-                </div>
-            </div>
-            <!--end container-->
-        </nav>
-    {% endblock %}
-    </header>
-    <div id="page-content">
-    {% block breadcrumbs %}
+                    <!--end container-->
+                </nav>
+            {% endblock %}
+        </header>
+        <div id="page-content">
+            {% block breadcrumbs %}
 
-    <ol class="breadcrumb">
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="{% url 'posts:list' %}">Blog</a></li>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'posts:list' %}">Blog</a></li>
 
-        {% block post_detail_link %}{% endblock %}
+                    {% block post_detail_link %}{% endblock %}
 
-    </ol>
+                </ol>
 
-    {% endblock %}
+            {% endblock %}
 
-    {% block main %}
-    {% endblock %}
+            {% block main %}
+            {% endblock %}
 
-    {% block footer %}
-    {% endblock %}
+            {% block footer %}
 
-    {% block footer_js %}
-        {{ block.super }}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
-        <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/scrollReveal.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/readmore.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/jquery.plugin.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/pace.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
-    {% endblock %}
-</div>
-</div>
+                <footer id="page-footer" class="block background-is-dark">
+                    <div class="container">
+                        <a href="#" class="brand"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                        <!--end brand-->
+                        <div class="contact map" id="contact">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <h3>Map</h3>
+                                    <div class="map" id="map"></div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <h3>Address</h3>
+                                            <address>
+                                                Zumazu Inc.<br>
+                                                <!-- 51, Neibuta, Vladivostok<br>
+                                                West Newton, PA 15089<br> -->
+                                                <br>
+                                                <!-- +1 (734) 123-4567<br> -->
+                                                <a href="#">hello@aite.today</a>
+                                            </address>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <h3>Social</h3>
+                                            <div class="social">
+                                                <a href="#"><i class="social_facebook_circle"></i>Facebook</a>
+                                                <a href="#"><i class="social_twitter_circle"></i>Twitter</a>
+                                                <a href="#"><i class="social_instagram_circle"></i>Instagram</a>
+                                                <!-- <a href="#"><i class="social_skype_circle"></i>Skype</a> -->
+                                            </div>
+                                            <!--end social-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <h3>Contact form</h3>
+                                    <form id="form-contact" method="post" class="clearfix inputs-underline">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="form-contact-name" name="name" placeholder="Your Name" required>
+                                                </div>
+                                                <!--end form-group -->
+                                            </div>
+                                            <!--end col-md-6 col-sm-6 -->
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="email" class="form-control" id="form-contact-email" name="email" placeholder="Your Email" required>
+                                                </div>
+                                                <!--end form-group -->
+                                            </div>
+                                            <!--end col-md-6 col-sm-6 -->
+                                        </div>
+                                        <!--end row -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control" id="form-contact-message" rows="8" name="message" placeholder="Your Message" required></textarea>
+                                                </div>
+                                                <!--end form-group -->
+                                            </div>
+                                            <!--end col-md-12 -->
+                                        </div>
+                                        <!--end row -->
+                                        <div class="form-group clearfix">
+                                            <button type="submit" class="btn pull-right btn-primary btn-rounded" id="form-contact-submit">Send a Message</button>
+                                        </div>
+                                        <!--end form-group -->
+                                        <div id="form-contact-status"></div>
+                                    </form>
+                                    <!--end form-contact -->
+                                </div>
+                                <!--end col-md-6-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end contact map-->
+                        <hr>
+                        <div class="note">&copy; 2017 All Rights Reserved</div>
+                        <!--end note-->
+                        <div class="to-top">
+                            <a href="#page-top" class="arrow-up framed scroll">
+                                <i class="arrow_up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end container-->
+                    <div class="background-wrapper">
+                        <div class="bg-transfer opacity-30">
+                            <img src="{% static 'img/slide-02.jpg' %}" alt="">
+                        </div>
+                        <div class="background-color background-color-black"></div>
+                    </div>
+                    <!--end background-wrapper-->
+                </footer>
+            {% endblock %}
+
+        </div>
+    </div>
 {% endblock %}
+
+{% block footer_js %}
+                {{ block.super }}
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+                <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+                <script type="text/javascript" src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+                <script type="text/javascript" src="{% static 'js/scrollReveal.min.js' %}"></script>
+                <script type="text/javascript" src="{% static 'js/jquery.plugin.min.js' %}"></script>
+                <script type="text/javascript" src="{% static 'js/pace.min.js' %}"></script>
+                <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+            {% endblock %}
