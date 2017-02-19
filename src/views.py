@@ -5,7 +5,7 @@ from posts.models import Post
 
 
 def index(request):
-    posts = Post.objects.all()[:3]
+    posts = Post.objects.visible()[:3]
     return render(request, "main/index.html", {
         'posts': posts,
     })
