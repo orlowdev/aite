@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    $(".comment-reply-btn").click(function (event) {
+    $(".comment-reply-btn").on("click", function (event) {
         event.preventDefault();
-        const replyBlock = $(this).parent().next(".comment-reply").show();
+        $(this).parent().next(".comment-reply").fadeToggle();
+        if (replyBlock.show()) {}
     });
 });
