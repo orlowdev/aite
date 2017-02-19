@@ -62,9 +62,10 @@
                                     <form class="animate center" id="form-hero">
                                         <label for="form-hero-email">Enter your email for the latest news</label>
                                         <div class="input-group">
+                                            {% comment %}TODO: Remove hardcoded style{% endcomment %}
                                             <input type="email" class="form-control" id="form-hero-email" name="email" placeholder="Your email">
                                             <span class="input-group-btn">
-                                            <button class="btn" type="submit"><i class="arrow_right"></i></button>
+                                            <button class="btn" type="submit" style="padding: 8.5px"><i class="fa fa-chevron-right"></i></button>
                                         </span>
                                         </div><!-- /input-group -->
                                     </form>
@@ -137,7 +138,6 @@
                                         <h3>School Management</h3>
                                         <p>Sign up to AITE and get a full-featured organizer that is ready to help you right out of the box. It is much cleverer than you expect.
                                         </p>
-                                        <a href="" class="btn btn-primary arrow">Read More</a>
                                     </div>
                                     <!--end description-->
                                 </div>
@@ -152,7 +152,6 @@
                                         <h3>Built for teachers by teachers</h3>
                                         <p>AITE is aware of all the best teaching practices and helps you to follow along.
                                         </p>
-                                        <a href="" class="btn btn-primary arrow">Read More</a>
                                     </div>
                                     <!--end description-->
                                 </div>
@@ -167,7 +166,6 @@
                                         <h3>Welcome to class</h3>
                                         <p>Looking for knowledge? AITE has quite some to offer.
                                         </p>
-                                        <a href="" class="btn btn-primary arrow">Read More</a>
                                     </div>
                                     <!--end description-->
                                 </div>
@@ -768,9 +766,10 @@
     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
 
     <script type="text/javascript">
-        const latitude = 34.038405;
-        const longitude = -117.946944;
+        const latitude = 43.112257;
+        const longitude = 131.961547;
         const mapTheme = "dark";
-        google.maps.event.addDomListener(window, 'load', simpleMap(latitude, longitude, markerImage, mapTheme));
+        google.maps.event.addDomListener(window, 'load', simpleMap(latitude, longitude, mapTheme));
     </script>
+
 {% endblock %}
