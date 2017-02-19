@@ -10,19 +10,22 @@
 {% endblock %}
 
 {% block main %}
+
     {% if post.image %}
         <div class="wide-image" style="background-image: url('{{ post.image.url }}')">
             <img src="{{ post.image.url }}"/>
         </div>
     {% endif %}
+
     <div class="container">
 
         <h1>{{ post.title }} <small>{{ post.publication_date|timesince }}</small></h1>
-        {% if post.draft %}<span style="color: red;">Draft</span>{% endif %}
 
-        <p>Read time: {{ post.read_time }} {{ post.read_time|pluralize:"minute,minutes" }}
-        </p>
+        {% if post.draft %}
+            <span style="color: red;">Draft</span>
+        {% endif %}
 
+        <p>Read time: {{ post.read_time }} {{ post.read_time|pluralize:"minute,minutes" }}</p>
         <p>Author: {% if post.user.get_full_name %}{{ post.user.get_full_name }}{% else %}{{ post.user }}{% endif %}</p>
 
         {% block social_links %}
@@ -45,34 +48,48 @@
             {% endif %}
             <hr/>
             {% for comment in post.comments %}
+
                 <blockquote>
+
                     <p>{{ comment.content }}</p>
                     <footer>
-                        via {{ comment.user }} | <cite title="">{{ comment.created_at|timesince }} ago</cite> |
+                        by {{ comment.user }} | <cite title="">{{ comment.created_at|timesince }} ago</cite> |
+
                         {% if comment.children.count > 0 %}
                             {{ comment.children|length }}
-                            {{ comment.children|length|pluralize:"comment,comments" }}{% endif %}
-                        <a href="#" class="comment-reply-btn">Reply</a> | <a href="{{ comment.get_absolute_url }}">Thread</a>
+                            {{ comment.children|length|pluralize:"comment,comments" }}
+                        {% endif %}
+
+                        <a href="#" class="comment-reply-btn">Reply</a> | <a href="{{ comment.get_absolute_url }}">
+                            Thread
+                        </a>
                     </footer>
 
                     <div class="comment-reply">
+
                         {% for reply in comment.children %}
+
                             <blockquote>
                                 <p>{{ reply.content }}</p>
                                 <footer>
                                     via {{ reply.user }} | <cite title="">{{ reply.created_at|timesince }} ago</cite>
                                 </footer>
                             </blockquote>
+
                         {% endfor %}
+
                         {% if request.user.is_authenticated %}
+
                             <form method="POST" action=".">{% csrf_token %}
                                 {{ form|crispy }}
                                 <input type="hidden" name="parent_id" value="{{ comment.id }}">
                                 <input type="submit" value="Reply" class="btn btn-default">
                             </form>
+
                         {% else %}
                             <p>Only logged in users can write comments</p>
                         {% endif %}
+
                     </div>
 
                 </blockquote>
