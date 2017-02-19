@@ -14,9 +14,8 @@
         <div class="wide-image" style="background-image: url('{{ post.image.url }}')">
             <img src="{{ post.image.url }}"/>
         </div>
-        {% endif %}
-    <div class="col-sm-8 col-sm-offset-2">
-
+    {% endif %}
+    <div class="container">
 
         <h1>{{ post.title }} <small>{{ post.publication_date|timesince }}</small></h1>
         {% if post.draft %}<span style="color: red;">Draft</span>{% endif %}
