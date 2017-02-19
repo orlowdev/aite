@@ -5,6 +5,7 @@
 {% block stylesheets %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 {% endblock %}
 
@@ -68,16 +69,15 @@
 
                 <footer id="page-footer" class="block background-is-dark">
                     <div class="container">
-                        <a href="#" class="brand"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                        <a href="/" class="brand" style="font-size: 3rem;">aite</a>
+
                         <!--end brand-->
                         <div class="contact map" id="contact">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
-                                    <h3>Map</h3>
-                                    <div class="map" id="map"></div>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
-                                            <h3>Address</h3>
+                                            <h3>Legal</h3>
                                             <address>
                                                 Zumazu Inc.<br>
                                                 <!-- 51, Neibuta, Vladivostok<br>
@@ -99,45 +99,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <h3>Contact form</h3>
-                                    <form id="form-contact" method="post" class="clearfix inputs-underline">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" id="form-contact-name" name="name" placeholder="Your Name" required>
-                                                </div>
-                                                <!--end form-group -->
-                                            </div>
-                                            <!--end col-md-6 col-sm-6 -->
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="form-group">
-                                                    <input type="email" class="form-control" id="form-contact-email" name="email" placeholder="Your Email" required>
-                                                </div>
-                                                <!--end form-group -->
-                                            </div>
-                                            <!--end col-md-6 col-sm-6 -->
-                                        </div>
-                                        <!--end row -->
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" id="form-contact-message" rows="8" name="message" placeholder="Your Message" required></textarea>
-                                                </div>
-                                                <!--end form-group -->
-                                            </div>
-                                            <!--end col-md-12 -->
-                                        </div>
-                                        <!--end row -->
-                                        <div class="form-group clearfix">
-                                            <button type="submit" class="btn pull-right btn-primary btn-rounded" id="form-contact-submit">Send a Message</button>
-                                        </div>
-                                        <!--end form-group -->
-                                        <div id="form-contact-status"></div>
-                                    </form>
-                                    <!--end form-contact -->
-                                </div>
-                                <!--end col-md-6-->
                             </div>
                             <!--end row-->
                         </div>
@@ -174,5 +135,6 @@
                 <script type="text/javascript" src="{% static 'js/scrollReveal.min.js' %}"></script>
                 <script type="text/javascript" src="{% static 'js/jquery.plugin.min.js' %}"></script>
                 <script type="text/javascript" src="{% static 'js/pace.min.js' %}"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
                 <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
             {% endblock %}

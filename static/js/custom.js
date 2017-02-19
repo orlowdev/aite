@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var resizeId;
 $(document).ready(function($) {
+
     "use strict";
 
     sliderHeight();
@@ -213,6 +214,9 @@ $(window).load(function(){
     }
     initializeOwl();
     centerVerticalNavigation();
+
+        $('.dateinput').datepicker({ format: "yyyy/mm/dd" });
+
 });
 
 $(window).resize(function(){

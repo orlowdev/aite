@@ -7,7 +7,7 @@ from .models import Post
 # Post form builder
 class PostForm(forms.ModelForm):
     content = forms.CharField(widget=PagedownWidget(show_preview=False))
-    publication_date = forms.DateField(widget=forms.SelectDateWidget)
+    publication_date = forms.DateField()
 
     class Meta:
         model = Post
