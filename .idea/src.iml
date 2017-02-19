@@ -24,6 +24,7 @@
     <orderEntry type="library" name="owl.carousel" level="application" />
     <orderEntry type="library" name="jquery.magnific-popup" level="application" />
     <orderEntry type="library" name="jquery.countdown" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
