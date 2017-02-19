@@ -10,21 +10,19 @@
         </form><br/>
     <div class="container">
     <div class="col-sm-8 col-sm-offset-2">
-        <h1>{{ title }}</h1>
-
         {% for post in posts %}
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="thumbnail">
+                    <div class="thumbnail card">
                         {% if post.image %}
-                            <img src="{{ post.image.url }}" class="img-responsive"/>
+                            <img src="{{ post.image.url }}" class="img-responsive card-header-img"/>
                         {% endif %}
                         <div class="caption post-detail-content">
                             <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                                 <small>{{ post.publication_date|timesince }} ago</small></h3>
                             {% if post.draft %}<span style="color: red;">Draft</span>{% endif %}
                             <p>Author: {% if post.user.get_full_name %}{{ post.user.get_full_name }}{% else %}{{ post.user }}{% endif %}</p>
-                            <div class="">{{ post.get_markdown }}</div>
+                            <div class="">{{ post.get_markdown|truncatewords_html:30 }}</div>
                             <p>
                                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary" role="button">View</a>
                             </p>
@@ -36,7 +34,7 @@
         <div class="pagination">
     <span class="step-links">
         {% if posts.has_previous %}
-            <a href="?page={{ posts.previous_page_number }}&q={{ request.GET.q }}">Previous</a>
+            <a href="?page={{ posts.previous_page_number }}&q={{ request.GET.q }}"><i class="fa fa-chevron-left"></i></a>
         {% endif %}
     </span>
             <span class="current">
@@ -46,7 +44,7 @@
     </span>
 
             {% if posts.has_next %}
-                <a href="?page={{ posts.next_page_number }}&q={{ request.GET.q }}">Next</a>
+                <a href="?page={{ posts.next_page_number }}&q={{ request.GET.q }}"><i class="fa fa-chevron-right"></i></a>
             {% endif %}
         </div>
     </div>
