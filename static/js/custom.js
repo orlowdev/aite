@@ -8,27 +8,6 @@ $(document).ready(function($) {
 
     sliderHeight();
 
-    if ($(".read-more").length > 0) {
-        $(".read-more").each(function() {
-
-            var collapseHeight = parseInt( $(this).attr("data-read-more-collapse-height"), 10);
-            if( !collapseHeight ) collapseHeight = 200;
-
-            var moreLink = $(this).attr("data-read-more-more-link");
-            if( !moreLink ) moreLink = "Read more";
-
-            var lessLink = $(this).attr("data-read-more-less-link");
-            if( !lessLink ) lessLink = "Read less";
-
-            $(this).readmore({
-                speed: 500,
-                collapsedHeight: collapseHeight,
-                moreLink: '<div class="read-more-btn"><a href="#" class="btn btn-framed btn-primary btn-light-frame btn-rounded">' + moreLink + '</a></div>',
-                lessLink: '<div class="read-more-btn"><a href="#" class="btn btn-framed btn-primary btn-light-frame btn-rounded">' + lessLink + '</a></div>'
-            });
-        });
-    }
-
 //  Smooth Scroll
 
     $('.main-nav a[href^="#"], a[href^="#"].scroll').on('click',function (e) {
@@ -121,40 +100,10 @@ $(document).ready(function($) {
         $(".count-down").countdown({until: new Date(year, month, day), padZeroes: true});
     }
 
-//  Form Validation
-
-    $("form .btn[type='submit']").on("click", function(){
-        var button = $(this);
-        var form = $(this).closest("form");
-        button.prepend("<div class='status'></div>");
-        form.validate({
-            submitHandler: function() {
-                $.post("assets/php/email.php", form.serialize(),  function(response) {
-                    //console.log(response);
-                    //$('#form-subscribe .form-contact-status').html(response);
-                    button.find(".status").append(response);
-                    form.addClass("submitted");
-                });
-                return false;
-            }
-        });
-    });
 
     $("[data-background-color-custom]").each(function() {
         $(this).css( "background-color", $(this).attr("data-background-color-custom") );
     });
-
-
-    if( $("body").hasClass("links-hover-effect") ){
-        $("a, button").each(function() {
-            if( !$(this).hasClass("image-popup") && !$(this).hasClass("video-popup") && !$(this).hasClass("arrow-up") && !$(this).hasClass("image") && !$(this).hasClass("no-hover-effect") ){
-                $(this).addClass("hover-effect");
-                var htmlContent = $(this).html();
-                $(this).text("");
-                $(this).append("<span><div class='hover-element'>" + htmlContent + "</div><div class='hover-element'>" + htmlContent + "</div></span>");
-            }
-        });
-    }
 
     if( $("body").hasClass("has-loading-screen") ){
         Pace.on("done", function() {

@@ -15,6 +15,10 @@
 
 {% block body %}
 
+    {% block messages %}
+        {{ block.super }}
+    {% endblock %}
+
     <div class="page-wrapper" id="page-top">
         {% block header %}
             <header id="page-header">
@@ -59,15 +63,21 @@
                             <!--end count-down-->
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3">
-                                    <form class="animate center" id="form-hero">
-                                        <label for="form-hero-email">Enter your email for the latest news</label>
-                                        <div class="input-group">
-                                            {% comment %}TODO: Remove hardcoded style{% endcomment %}
-                                            <input type="email" class="form-control" id="form-hero-email" name="email" placeholder="Your email">
-                                            <span class="input-group-btn">
+
+                                    <form method="POST" action="{% url 'newsletters:subscription' %}" class="animate center" id="form-hero">
+                                        {% csrf_token %}
+
+                                        {% for field in form %}
+                                            {{ field.errors }}
+                                            {{ field.label_tag }}
+                                            <div class="input-group">
+                                                {% comment %}TODO: Remove hardcoded style{% endcomment %}
+                                                {{ field }}
+                                                <span class="input-group-btn">
                                             <button class="btn" type="submit" style="padding: 8.5px"><i class="fa fa-chevron-right"></i></button>
                                         </span>
-                                        </div><!-- /input-group -->
+                                            </div>
+                                        {% endfor %}<!-- /input-group -->
                                     </form>
                                     <!--end form-hero-->
                                 </div>

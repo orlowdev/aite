@@ -1,11 +1,16 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
+
+from newsletters.forms import SubscriptionForm
 
 
 def subscription(request):
-    messages.add_message(
-        'success',
-        'You successfully subscribed to AITE newsletter! Keep in touch!'
-    )
+
+    form = SubscriptionForm(request.POST or None)
+
+    if form.is_valid():
+        messages.success(request, "Successfully saved", extra_tags="html_safe")
+
+        form.save()
 
     return redirect('index')
