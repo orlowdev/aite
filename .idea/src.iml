@@ -25,6 +25,9 @@
     <orderEntry type="library" name="jquery.magnific-popup" level="application" />
     <orderEntry type="library" name="jquery.countdown" level="application" />
     <orderEntry type="library" name="jquery-ui" level="application" />
+    <orderEntry type="library" name="pace" level="application" />
+    <orderEntry type="library" name="countdown" level="application" />
+    <orderEntry type="library" name="jquery-migrate-3.0.0" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
