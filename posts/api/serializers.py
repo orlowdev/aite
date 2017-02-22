@@ -1,13 +1,9 @@
-from rest_framework.serializers import (
-    HyperlinkedIdentityField,
-    ModelSerializer,
-    SerializerMethodField,
-)
+from rest_framework.serializers import (HyperlinkedIdentityField,
+                                        ModelSerializer, SerializerMethodField)
 
 from accounts.api.serializers import UserDetailSerializer
 from comments.api.serializers import CommentSerializer
 from comments.models import Comment
-
 from posts.models import Post
 
 post_detail_url = HyperlinkedIdentityField(

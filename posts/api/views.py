@@ -1,28 +1,14 @@
 from django.db.models import Q
-from rest_framework.filters import (
-    SearchFilter,
-    OrderingFilter,
-)
-from rest_framework.generics import (
-    CreateAPIView,
-    DestroyAPIView,
-    ListAPIView,
-    RetrieveAPIView,
-    RetrieveUpdateAPIView,
-)
-from rest_framework.permissions import (
-    AllowAny,
-)
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.generics import (CreateAPIView, DestroyAPIView,
+                                     ListAPIView, RetrieveAPIView,
+                                     RetrieveUpdateAPIView)
+from rest_framework.permissions import AllowAny
 
+from posts.api.pagination import PostPageNumberPagination
 from posts.api.permissions import IsOwnerOrReadOnly
-from posts.api.serializers import (
-    PostCreateUpdateSerializer,
-    PostDetailSerializer,
-    PostListSerializer,
-)
-from posts.api.pagination import (
-    PostPageNumberPagination,
-)
+from posts.api.serializers import (PostCreateUpdateSerializer,
+                                   PostDetailSerializer, PostListSerializer)
 from posts.models import Post
 
 
@@ -85,4 +71,3 @@ class PostListAPIView(ListAPIView):
             ).distinct()
 
         return queryset_list
-

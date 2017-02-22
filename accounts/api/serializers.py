@@ -3,12 +3,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import CharField
-from rest_framework.serializers import (
-    ModelSerializer,
-    SerializerMethodField,
-    EmailField,
-)
-
+from rest_framework.serializers import (EmailField, ModelSerializer,
+                                        SerializerMethodField)
 
 User = get_user_model()
 

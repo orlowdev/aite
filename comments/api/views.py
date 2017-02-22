@@ -1,32 +1,14 @@
 from django.db.models import Q
-from rest_framework.filters import (
-    SearchFilter,
-    OrderingFilter,
-)
-from rest_framework.generics import (
-    CreateAPIView,
-    ListAPIView,
-    RetrieveAPIView,
-)
-from rest_framework.mixins import (
-    DestroyModelMixin,
-    UpdateModelMixin,
-)
-from rest_framework.permissions import (
-    IsAuthenticated,
-    AllowAny)
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from posts.api.pagination import (
-    PostPageNumberPagination,
-)
-
+from comments.api.serializers import (CommentDetailSerializer,
+                                      CommentEditSerializer, CommentSerializer,
+                                      create_comment_serializer)
 from comments.models import Comment
-from comments.api.serializers import (
-    CommentSerializer,
-    CommentDetailSerializer,
-    CommentEditSerializer,
-    create_comment_serializer,
-)
+from posts.api.pagination import PostPageNumberPagination
 
 
 class CommentCreateAPIView(CreateAPIView):
@@ -87,4 +69,3 @@ class CommentListAPIView(ListAPIView):
             ).distinct()
 
         return queryset_list
-

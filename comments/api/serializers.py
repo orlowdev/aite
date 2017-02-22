@@ -1,10 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from rest_framework.exceptions import ValidationError
-from rest_framework.serializers import (
-    ModelSerializer,
-    SerializerMethodField,
-)
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 from accounts.api.serializers import UserDetailSerializer
 from comments.models import Comment
