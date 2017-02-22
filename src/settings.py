@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # Inner
     'accounts.apps.AccountsConfig',
     'comments.apps.CommentsConfig',
+    'newsletters.apps.NewslettersConfig',
     'posts.apps.PostsConfig',
 ]
 

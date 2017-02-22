@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from newsletters.forms import SubscriptionForm
+from newsletters.models import Subscription
+
+
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ["__str__", "full_name", "date"]
+    form = SubscriptionForm
+
+admin.site.register(Subscription, SubscriptionAdmin)

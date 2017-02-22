@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
 
-# Create your views here.
+
+def subscription(request):
+    messages.add_message(
+        'success',
+        'You successfully subscribed to AITE newsletter! Keep in touch!'
+    )
+
+    return redirect('index')
