@@ -1,0 +1,26 @@
+<div class="block">
+    <div class="container">
+        <h2>From the blog.</h2>
+        <div class="row">
+
+            {% for post in posts %}
+                <div class="col-md-4 col-sm-4">
+                    <div class="blog-item" data-scroll-reveal="enter left and move 20px">
+                        <a href="#" class="image">
+                            <h3>{{ post.title }}</h3>
+                            <div class="bg-transfer">
+                                {% if post.image %}<img src="{{ post.image.url }}" alt="">{% endif %}
+                            </div>
+                        </a>
+                        <figure class="date"><i class="icon_clock_alt"></i>{{ post.publication_date }}</figure>
+                        <p>
+                            {{ post.content|truncatechars:200 }}
+                        </p>
+                        <a href="" class="btn btn-rounded btn-primary">Read More</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>

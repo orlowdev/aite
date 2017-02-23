@@ -1,0 +1,85 @@
+{% load staticfiles %}
+
+<footer id="page-footer" class="block background-is-dark">
+
+    <div class="container">
+
+        {% comment %}TODO: Remove hardcoded style{% endcomment %}
+        <a href="{% url 'index' %}" class="brand" style="font-size: 3rem;">aite</a>
+
+        <div class="contact map" id="contact">
+            <div class="row">
+
+                <div class="col-md-6 col-sm-6">
+
+                    <h3>Map</h3>
+                    <div class="map" id="map"></div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6">
+                            <h3>Address</h3>
+                            <address>
+                                Totemish Inc.<br>
+                                51, Neibuta, Vladivostok<br>
+                                Primorsky Krai, 690109<br>
+                                <br>
+                                {% comment %}+7 (9520) 818-494<br>{% endcomment %}
+                                <a href="#">hello@aite.today</a>
+                            </address>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            <h3>Social</h3>
+                            <div class="social">
+                            {% comment %}TODO: Add social links{% endcomment %}
+                                <a href="#"><i class="social_facebook_circle"></i>Facebook</a>
+                                <a href="#"><i class="social_twitter_circle"></i>Twitter</a>
+                                <a href="#"><i class="social_instagram_circle"></i>Instagram</a>
+                            </div>
+                            <!--end social-->
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <h3>Contact form</h3>
+                    <form id="form-contact" method="POST" action="{% url 'contact-forms:simple' %}" class="clearfix inputs-underline">
+                        {% csrf_token %}
+                            {% for field in simple_contact_form %}
+                                    {{ field.errors }}
+                                    <div class="form-group">
+                                        {{ field }}
+                                    </div>
+                            {% endfor %}
+                        <div class="form-group clearfix">
+                            <button type="submit" class="btn pull-right btn-primary btn-rounded" id="form-contact-submit">Send a Message</button>
+                        </div>
+                        <div id="form-contact-status"></div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="note">&copy; 2017 All Rights Reserved</div>
+
+        <div class="to-top">
+            <a href="#page-top" class="arrow-up framed scroll">
+                <i class="arrow_up"></i>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="background-wrapper">
+        <div class="bg-transfer opacity-30">
+            <img src="{% static 'img/slide-02.jpg' %}" alt="">
+        </div>
+        <div class="background-color background-color-black"></div>
+    </div>
+
+</footer>
