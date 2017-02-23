@@ -22,29 +22,30 @@
 
 <body class="{% block body_class %}{% endblock %}" {% block body_attributes %}{% endblock %}>
 
-{% block body %}
-
-    {% block messages %}
-        {% include 'blocks/messages.html' %}
-    {% endblock %}
-
-    {% block navigation %}
-    {% endblock %}
-
-    {% block breadcrumbs %}
-    {% endblock %}
-
-    {% block header %}
-    {% endblock %}
-
-    {% block main %}
-    {% endblock %}
-
-    {% block footer %}
-    {% endblock %}
-
+{% block pre_content %}
 {% endblock %}
 
+{% block messages %}
+    {% include 'blocks/messages.html' %}
+{% endblock %}
+
+{% block navigation %}
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block post_content %}
+{% endblock %}
 
 {% block footer_js %}
     {% include 'blocks/footer_js.html' %}
