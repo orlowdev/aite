@@ -27,7 +27,6 @@
                     <!-- TODO: Move hardcoded styles -->
                     <a href="/" class="brand" style="font-size: 3rem;">aite</a>
                 </div>
-                <!--end left-->
                 <div class="right">
                     <ul class="nav navigation-links animate">
                         {% if not request.user.is_authenticated %}
@@ -43,10 +42,8 @@
                         <figure></figure>
                     </div>
                 </div>
-                <!--end right-->
             </div>
         </div>
-        <!--end container-->
     </nav>
         </header>
 
@@ -70,7 +67,6 @@
         <div class="container">
             <a href="/" class="brand" style="font-size: 3rem;">aite</a>
 
-            <!--end brand-->
             <div class="contact map" id="contact">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
@@ -79,10 +75,7 @@
                                 <h3>Legal</h3>
                                 <address>
                                     Zumazu Inc.<br>
-                                    <!-- 51, Neibuta, Vladivostok<br>
-                                    West Newton, PA 15089<br> -->
                                     <br>
-                                    <!-- +1 (734) 123-4567<br> -->
                                     <a href="#">hello@aite.today</a>
                                 </address>
                             </div>
@@ -92,33 +85,26 @@
                                     <a href="#"><i class="social_facebook_circle"></i>Facebook</a>
                                     <a href="#"><i class="social_twitter_circle"></i>Twitter</a>
                                     <a href="#"><i class="social_instagram_circle"></i>Instagram</a>
-                                    <!-- <a href="#"><i class="social_skype_circle"></i>Skype</a> -->
                                 </div>
-                                <!--end social-->
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--end row-->
             </div>
-            <!--end contact map-->
             <hr>
             <div class="note">&copy; 2017 All Rights Reserved</div>
-            <!--end note-->
             <div class="to-top">
                 <a href="#page-top" class="arrow-up framed scroll">
                     <i class="arrow_up"></i>
                 </a>
             </div>
         </div>
-        <!--end container-->
         <div class="background-wrapper">
             <div class="bg-transfer opacity-30">
                 <img src="{% static 'img/slide-02.jpg' %}" alt="">
             </div>
             <div class="background-color background-color-black"></div>
         </div>
-        <!--end background-wrapper-->
     </footer>
 {% endblock %}
 
