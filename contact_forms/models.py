@@ -1,7 +1,25 @@
+from django.contrib.auth.models import User
 from django.db import models
 
+FEEDBACK_CHOICES = (
+    ('suggestion', 'Suggestion'),
+    ('complaint', 'Complaint'),
+)
 
-# TODO: Add bug report and feedback models
+BUG_REPORT_CHOICES = (
+    ('execution_error', 'Error during app execution'),
+    ('spelling_mistake', 'Spelling mistake'),
+    ('translation_mistake', 'Translation mistake'),
+    ('authentication_problem', 'Problem with authentication/authorization'),
+    ('other', 'Other'),
+)
+
+PLATFORM_CHOICES = (
+    ('android', 'Android'),
+    ('ios', 'iOS'),
+    ('windows', 'Windows'),
+    ('web', 'Web'),
+)
 
 
 class SimpleContact(models.Model):
@@ -39,3 +57,66 @@ class SimpleContact(models.Model):
 
     def __str__(self):
         return 'Message {} by {}'.format(self.id, self.email)
+
+
+class Feedback(models.Model):
+    user = models.ForeignKey(
+        to=User,
+    )
+
+    subject = models.CharField(
+        max_length=32,
+        help_text='Subject',
+        choices=FEEDBACK_CHOICES,
+    )
+
+    message = models.TextField(
+        verbose_name='Message',
+        help_text='Enter your message here',
+    )
+
+    creation_date = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Creation Date',
+        help_text='Date of feedback arrival'
+    )
+
+    def __str__(self):
+        return '%s by %s'.format(self.subject, self.user.username)
+
+
+class BugReport(models.Model):
+    user = models.ForeignKey(
+        to=User,
+    )
+
+    platform = models.CharField(
+        max_length=32,
+        choices=PLATFORM_CHOICES,
+    )
+
+    subject = models.CharField(
+        max_length=32,
+        help_text='Bug Type',
+        choices=BUG_REPORT_CHOICES,
+    )
+
+    message = models.TextField(
+        verbose_name='Message',
+        help_text='Enter your message here',
+    )
+
+    creation_date = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Creation Date',
+        help_text='Date of bug report arrival',
+    )
+
+    fix_commit = models.CharField(
+        max_length=64,
+        verbose_name='Fixing Commit',
+        help_text='Reference to a commit fixing the issue',
+    )
+
+    def __str__(self):
+        return '%s by %s'.format(self.subject, self.user.username)
