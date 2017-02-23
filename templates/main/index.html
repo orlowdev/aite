@@ -67,7 +67,7 @@
                                     <form method="POST" action="{% url 'newsletters:subscription' %}" class="animate center" id="form-hero">
                                         {% csrf_token %}
 
-                                        {% for field in form %}
+                                        {% for field in subscription_form %}
                                             {{ field.errors }}
                                             {{ field.label_tag }}
                                             <div class="input-group">
@@ -77,7 +77,8 @@
                                             <button class="btn" type="submit" style="padding: 8.5px"><i class="fa fa-chevron-right"></i></button>
                                         </span>
                                             </div>
-                                        {% endfor %}<!-- /input-group -->
+                                        {% endfor %}
+                                        <!-- /input-group -->
                                     </form>
                                     <!--end form-hero-->
                                 </div>
@@ -617,33 +618,15 @@
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <h3>Contact form</h3>
-                                <form id="form-contact" method="post" class="clearfix inputs-underline">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="form-contact-name" name="name" placeholder="Your Name" required>
-                                            </div>
-                                            <!--end form-group -->
-                                        </div>
-                                        <!--end col-md-6 col-sm-6 -->
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" id="form-contact-email" name="email" placeholder="Your Email" required>
-                                            </div>
-                                            <!--end form-group -->
-                                        </div>
-                                        <!--end col-md-6 col-sm-6 -->
-                                    </div>
-                                    <!--end row -->
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <textarea class="form-control" id="form-contact-message" rows="8" name="message" placeholder="Your Message" required></textarea>
-                                            </div>
-                                            <!--end form-group -->
-                                        </div>
-                                        <!--end col-md-12 -->
-                                    </div>
+                                <form id="form-contact" method="POST" action="{% url 'contact-forms:simple' %}" class="clearfix inputs-underline">
+                                    {% csrf_token %}
+                                        {% for field in simple_contact_form %}
+                                                {{ field.errors }}
+                                                <div class="form-group">
+                                                    {{ field }}
+                                                </div>
+                                        {% endfor %}
+
                                     <!--end row -->
                                     <div class="form-group clearfix">
                                         <button type="submit" class="btn pull-right btn-primary btn-rounded" id="form-contact-submit">Send a Message</button>

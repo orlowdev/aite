@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^subscribe/', include("newsletters.urls", namespace="newsletters")),
+    url(r'^submit/', include("contact_forms.urls", namespace="contact-forms")),
 
     url(r'^api/auth/token', obtain_jwt_token),
     url(r'^api/posts/', include("posts.api.urls", namespace="api-posts")),
