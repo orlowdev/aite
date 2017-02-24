@@ -26,6 +26,9 @@
     <orderEntry type="library" name="pace" level="application" />
     <orderEntry type="library" name="countdown" level="application" />
     <orderEntry type="library" name="jquery-migrate-3.0.0" level="application" />
+    <orderEntry type="library" name="fullcalendar" level="application" />
+    <orderEntry type="library" name="moment" level="application" />
+    <orderEntry type="library" name="locale-all" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
@@ -35,6 +38,7 @@
         <option value="$MODULE_DIR$/posts/templates" />
         <option value="$MODULE_DIR$/comments/templates" />
         <option value="$MODULE_DIR$/accounts/templates" />
+        <option value="$MODULE_DIR$/calendars/templates" />
       </list>
     </option>
   </component>
