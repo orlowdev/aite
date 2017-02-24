@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+{% endblock %}
+
+{% block header_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"
+            integrity="sha256-JklDYODbg0X+8sPiKkcFURb5z7RvlNMIaE3RA2z97vw=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/locale-all.js"></script>
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+
+            const $overlay = $('<div id="overlay"></div>');
+            $overlay.append($("#day_click_modal"));
+            $("body").append($overlay);
+
+            let event_list = [
+                {
+                    title:  'My Event',
+                    start:  '2017-02-23T14:30:00',
+                    allDay: false
+                }
+    ];
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'title',
+                    center: 'today prev,next',
+                    right: 'agendaDay,agendaWeek,month listDay,listWeek,listMonth'
+                },
+                aspectRatio: 1.6,
+                weekNumbersWithinDays: true,
+                eventLimit: true,
+                navLinks: true,
+                // SEND THESE TO USER SETTINGS
+
+                // First day of the week
+                firstDay: 1,
+                // Shown right-to-left
+                isRTL: false,
+                // Show weekends
+                weekends: true,
+                // Hide specific weekdays
+                hiddenDays: [],
+                // Dynamic amount of weeks in a month
+                fixedWeekCount: false,
+                // Show number of weeks
+                weekNumbers: false,
+                // Working hours
+                businessHours: {
+                    dow: [1,2,3,4,5],
+                    start: '10:00',
+                    end: '18:00'
+                },
+                // Daily event limit
+                views: {
+                    agenda: {
+                        eventLimit: 3
+                    },
+                    month: {
+                        eventLimit: 4
+                    }
+                },
+                slotDuration: '00:30:00',
+                allDaySlot: false,
+                nowIndicator: true,
+                locale: 'en',
+
+                dayClick: function(date, jsEvent, view) {
+                    $overlay.show();
+                },
+
+                events: event_list,
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body_class %}has-loading-screen{% endblock %}
+{% block body_attributes %}data-spy="scroll" data-target=".navigation"{% endblock %}
+
+{% block pre_content %}
+    <div class="page-wrapper" id="page-top">
+{% endblock %}
+
+{% block navigation %}
+    <header id="page-header">
+
+        <nav class="navigation nav-btn-only background-is-dark">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="left">
+                        <!-- TODO: Move hardcoded styles -->
+                        <a href="/" class="brand" style="font-size: 3rem;">aite</a>
+                    </div>
+                    <div class="right">
+                        <ul class="nav navigation-links animate">
+                            {% if not request.user.is_authenticated %}
+                                <li><a href="{% url 'login' %}" class="scroll">Sign In</a></li>
+                                <li><a href="{% url 'register' %}" class="scroll">Sign Up</a></li>
+                            {% else %}
+                                <li><a href="{% url 'logout' %}" class="scroll">Logout</a></li>
+                            {% endif %}
+                        </ul>
+                        <div class="nav-btn">
+                            <figure></figure>
+                            <figure></figure>
+                            <figure></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+{% endblock %}
+
+{% block main %}
+    <div id="page-content">
+    <div class="container">
+    <br/><br/><br/>
+        <div class="calendar-container" id='calendar'></div>
+    <br/><br/><br/>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer id="page-footer" class="block background-is-dark">
+        <div class="container">
+            <a href="/" class="brand" style="font-size: 3rem;">aite</a>
+
+            <div class="contact map" id="contact">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <h3>Legal</h3>
+                                <address>
+                                    Totemish Inc.<br>
+                                    <br>
+                                    <a href="#">hello@aite.today</a>
+                                </address>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <h3>Social</h3>
+                                <div class="social">
+                                    <a href="#"><i class="social_facebook_circle"></i>Facebook</a>
+                                    <a href="#"><i class="social_twitter_circle"></i>Twitter</a>
+                                    <a href="#"><i class="social_instagram_circle"></i>Instagram</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="note">&copy; 2017 Totemish</div>
+            <div class="to-top">
+                <a href="#page-top" class="arrow-up framed scroll">
+                    <i class="arrow_up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="background-wrapper">
+            <div class="bg-transfer opacity-30">
+                <img src="{% static 'img/slide-02.jpg' %}" alt="">
+            </div>
+            <div class="background-color background-color-black"></div>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block post_content %}
+    </div>
+    </div>
+{% endblock %}
+
+{% block modals %}
+    {% include 'modals/calendar/day_click_modal.html' %}
+{% endblock %}
+
+{% block footer_js %}
+{% endblock %}

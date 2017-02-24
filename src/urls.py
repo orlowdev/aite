@@ -31,6 +31,8 @@ urlpatterns = [
     url(r'^subscribe/', include("newsletters.urls", namespace="newsletters")),
     url(r'^submit/', include("contact_forms.urls", namespace="contact-forms")),
 
+    url(r'^dashboard/', include("dashboards.urls", namespace="dashboards")),
+
     url(r'^api/auth/token', obtain_jwt_token),
     url(r'^api/posts/', include("posts.api.urls", namespace="api-posts")),
     url(r'^api/comments/', include("comments.api.urls", namespace="api-comments")),
