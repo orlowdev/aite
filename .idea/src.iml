@@ -12,9 +12,7 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/.idea" />
-    </content>
+    <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="Python 3.5.2 virtualenv at ~/work/venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
@@ -37,7 +35,6 @@
         <option value="$MODULE_DIR$/posts/templates" />
         <option value="$MODULE_DIR$/comments/templates" />
         <option value="$MODULE_DIR$/accounts/templates" />
-        <option value="$MODULE_DIR$/dashboards/templates" />
       </list>
     </option>
   </component>
