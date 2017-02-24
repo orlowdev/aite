@@ -1,9 +1,13 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>
         {% block title %}{% endblock %}
     </title>
+
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 
     {% block meta %}
         {% include 'blocks/meta.html' %}
