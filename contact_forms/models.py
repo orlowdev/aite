@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
+
 
 FEEDBACK_CHOICES = (
     ('suggestion', 'Suggestion'),
@@ -24,7 +25,8 @@ PLATFORM_CHOICES = (
 
 class BugReport(models.Model):
     user = models.ForeignKey(
-        to=User,
+        to=settings.AUTH_USER_MODEL,
+        default=1,
     )
 
     platform = models.CharField(
@@ -56,12 +58,13 @@ class BugReport(models.Model):
     )
 
     def __str__(self):
-        return '%s by %s'.format(self.subject, self.user.username)
+        return '{}: {} by {}'.format(self.platform, self.subject, self.user.username)
 
 
 class Feedback(models.Model):
     user = models.ForeignKey(
-        to=User,
+        to=settings.AUTH_USER_MODEL,
+        default=1,
     )
 
     subject = models.CharField(
@@ -82,7 +85,7 @@ class Feedback(models.Model):
     )
 
     def __str__(self):
-        return '%s by %s'.format(self.subject, self.user.username)
+        return '{} by {}'.format(self.subject, self.user.username)
 
 
 class SimpleContact(models.Model):

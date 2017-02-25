@@ -1,7 +1,7 @@
 # Provides serialized Post creation
 from rest_framework.serializers import ModelSerializer
 
-from contact_forms.models import SimpleContact
+from contact_forms.models import SimpleContact, BugReport
 
 
 class SimpleContactCreateSerializer(ModelSerializer):
@@ -11,5 +11,16 @@ class SimpleContactCreateSerializer(ModelSerializer):
         fields = [
             "name",
             "email",
+            "message",
+        ]
+
+
+class BugReportCreateSerializer(ModelSerializer):
+
+    class Meta:
+        model = BugReport
+        fields = [
+            "platform",
+            "subject",
             "message",
         ]
