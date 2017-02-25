@@ -27,24 +27,58 @@
             $overlay.append($("#day_click_modal"));
             $("body").append($overlay);
 
+            $overlay.click(function () {
+                $(this).fadeOut();
+            });
+
             let event_list = [
                 {
                     title:  'My Event',
                     start:  '2017-02-23T14:30:00',
                     allDay: false
                 }
-    ];
+            ];
+
+            function getWindowWidth(){
+                return $(window).width();
+            }
 
             $('#calendar').fullCalendar({
                 header: {
-                    left: 'title',
-                    center: 'today prev,next',
+                    left: 'prev,next today',
+                    center: 'title',
                     right: 'agendaDay,agendaWeek,month listDay,listWeek,listMonth'
                 },
-                aspectRatio: 1.6,
                 weekNumbersWithinDays: true,
                 eventLimit: true,
                 navLinks: true,
+                editable: true,
+                dragOpacity: 1.0,
+                windowResize: function(view) {
+                    ww = getWindowWidth();
+                    view = getView();
+                    let currentView = $('#calendar').fullCalendar('getView');
+
+                    function getView(){
+                        if (ww <= 800) {
+                            return 'agendaDay'
+                        } else if (ww > 800 && ww <= 1366) {
+                            return 'agendaWeek';
+                        } else if (ww > 1366) {
+                            return 'month';
+                        }
+                    }
+
+                    if(view != currentView){
+                        $('#calendar').fullCalendar('changeView',view);
+                    }
+                    if(ww <= 768){
+                        $('.fc-header-right .fc-button').hide();
+                    }else{
+                        $('.fc-header-right .fc-button').show();
+                    }
+                },
+
                 // SEND THESE TO USER SETTINGS
 
                 // First day of the week
@@ -53,6 +87,7 @@
                 isRTL: false,
                 // Show weekends
                 weekends: true,
+                todayBackgroundColor: '#fff',
                 // Hide specific weekdays
                 hiddenDays: [],
                 // Dynamic amount of weeks in a month
@@ -80,7 +115,7 @@
                 locale: 'en',
 
                 dayClick: function(date, jsEvent, view) {
-                    $overlay.show();
+                    $overlay.fadeIn();
                 },
 
                 events: event_list,
@@ -129,57 +164,18 @@
 
 {% block main %}
     <div id="page-content">
-    <div class="container">
-    <br/><br/><br/>
-        <div class="calendar-container" id='calendar'></div>
+    <div class="container-fluid">
+        <div class="col-sm-12 col-lg-10 col-lg-offset-1">
+        <div class="card">
+            <div class="calendar-container" id='calendar'></div>
+        </div>
+            </div>
     <br/><br/><br/>
     </div>
 {% endblock %}
 
 {% block footer %}
-    <footer id="page-footer" class="block background-is-dark">
-        <div class="container">
-            <a href="/" class="brand" style="font-size: 3rem;">aite</a>
-
-            <div class="contact map" id="contact">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <h3>Legal</h3>
-                                <address>
-                                    Totemish Inc.<br>
-                                    <br>
-                                    <a href="#">hello@aite.today</a>
-                                </address>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <h3>Social</h3>
-                                <div class="social">
-                                    <a href="#"><i class="social_facebook_circle"></i>Facebook</a>
-                                    <a href="#"><i class="social_twitter_circle"></i>Twitter</a>
-                                    <a href="#"><i class="social_instagram_circle"></i>Instagram</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="note">&copy; 2017 Totemish</div>
-            <div class="to-top">
-                <a href="#page-top" class="arrow-up framed scroll">
-                    <i class="arrow_up"></i>
-                </a>
-            </div>
-        </div>
-        <div class="background-wrapper">
-            <div class="bg-transfer opacity-30">
-                <img src="{% static 'img/slide-02.jpg' %}" alt="">
-            </div>
-            <div class="background-color background-color-black"></div>
-        </div>
-    </footer>
+    <div class="note simple-footer">&copy; 2017 Totemish</div>
 {% endblock %}
 
 {% block post_content %}
