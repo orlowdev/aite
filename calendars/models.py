@@ -3,7 +3,7 @@ from django.conf import settings
 from django.db import models
 
 
-class UserCalendar(models.Model):
+class Event(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         default=1,

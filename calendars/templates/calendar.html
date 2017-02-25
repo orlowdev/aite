@@ -31,13 +31,7 @@
                 $(this).fadeOut();
             });
 
-            let event_list = [
-                {
-                    title:  'My Event',
-                    start:  '2017-02-23T14:30:00',
-                    allDay: false
-                }
-            ];
+            let event_list = '/api/calendar/list/';
 
             function getWindowWidth(){
                 return $(window).width();
