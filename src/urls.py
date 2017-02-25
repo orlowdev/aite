@@ -34,8 +34,9 @@ urlpatterns = [
     url(r'^dashboard/', include("dashboards.urls", namespace="dashboards")),
 
     url(r'^api/auth/token', obtain_jwt_token),
-    url(r'^api/posts/', include("posts.api.urls", namespace="api-posts")),
     url(r'^api/comments/', include("comments.api.urls", namespace="api-comments")),
+    url(r'^api/contact-forms/', include("contact_forms.api.urls", namespace="api-contact-forms")),
+    url(r'^api/posts/', include("posts.api.urls", namespace="api-posts")),
     url(r'^api/users/', include("accounts.api.urls", namespace="api-users")),
 
     url(r'^comments/', include("comments.urls", namespace="comments")),
