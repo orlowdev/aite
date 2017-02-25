@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from src import credentials
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +27,19 @@ SECRET_KEY = 'qz*b33l2bk_p10iy1qki79swz6b1-+i$^=7t=$-a75rs^upy2='
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+EMAIL_HOST = credentials.EMAIL_HOST
+EMAIL_HOST_USER = credentials.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = credentials.EMAIL_HOST_PASSWORD
+EMAIL_PORT = credentials.EMAIL_PORT
+EMAIL_USE_TLS = credentials.EMAIL_USE_TLS
+
+"""
+If using gmail, you will need to
+unlock Captcha to enable Django
+to send for you:
+https://accounts.google.com/displayunlockcaptcha
+"""
 
 
 # Application definition
