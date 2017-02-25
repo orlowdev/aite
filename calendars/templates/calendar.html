@@ -31,7 +31,9 @@
                 $(this).fadeOut();
             });
 
-            let event_list = '/api/calendar/list/';
+            const event_sources = [{
+                url: '/api/calendar/list/',
+            }];
 
             function getWindowWidth(){
                 return $(window).width();
@@ -112,7 +114,7 @@
                     $overlay.fadeIn();
                 },
 
-                events: event_list,
+                eventSources: event_sources,
             });
         });
     </script>

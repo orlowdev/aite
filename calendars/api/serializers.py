@@ -9,7 +9,6 @@ class EventListSerializer(ModelSerializer):
         model = Event
         fields = [
             "id",
-            "user",
             "title",
             "start",
         ]
