@@ -2,4 +2,4 @@ from django.shortcuts import render
 
 
 def dashboard_main(request):
-    return render(request, 'calendar.html')
+    return render(request, 'user_dashboard.html')
