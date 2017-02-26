@@ -1,0 +1,31 @@
+<header id="page-header">
+    <nav class="navigation background-is-dark">
+        <div class="container">
+            <div class="wrapper">
+                <div class="left">
+                    <!-- TODO: Move hardcoded styles -->
+                    <a href="/" class="brand" style="font-size: 3rem;">aite</a>
+                </div>
+                <div class="right">
+                    <ul class="nav navigation-links animate">
+
+                        {% if not request.user.is_authenticated %}
+                            <li><a href="{% url 'login' %}" class="scroll">Sign In</a></li>
+                            <li><a href="{% url 'register' %}" class="scroll">Sign Up</a></li>
+                        {% else %}
+                            <li><a href="{% url 'dashboards:main' %}" class="scroll">Dashboard</a></li>
+                            <li><a href="{% url 'logout' %}" class="scroll">Logout</a></li>
+                        {% endif %}
+                        <li>|</li>
+                        <li><a href="{% url 'index' %}" class="scroll">Home</a></li>
+                    </ul>
+                    <div class="nav-btn">
+                        <figure></figure>
+                        <figure></figure>
+                        <figure></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

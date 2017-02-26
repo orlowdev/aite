@@ -1,5 +1,9 @@
 h1 {
-	color: #777;
+    color: #777;
+}
+
+body {
+    background-color: #e8e8e8;
 }
 
 .wmd-panel {
@@ -18,9 +22,6 @@ h1 {
 }
 
 .navigation {
-    position: absolute; !important;
-    left: 0; !important;
-    top: 0; !important;
     background-color: rgba(0,0,0,0.8); !important;
 }
 
@@ -64,14 +65,14 @@ h1 {
 
 /* Set the image to fill its parent and make transparent */
 .wide-image img {
-  min-height: 100%;
-  min-width: 100%;
-  /* IE 8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  /* IE 5-7 */
-  filter: alpha(opacity=0);
-  /* modern browsers */
-  opacity: 0;
+    min-height: 100%;
+    min-width: 100%;
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    /* IE 5-7 */
+    filter: alpha(opacity=0);
+    /* modern browsers */
+    opacity: 0;
 }
 
 .calendar-container {
@@ -80,19 +81,19 @@ h1 {
 }
 
 #overlay {
-  background:rgba(0,0,0,0.8);
-  width:100%;
-  height:100%;
-  position:absolute;
-  top:0;
-  left:0;
-  display:none;
-  text-align:center;
-    z-index: 100;
+    background:rgba(0,0,0,0.8);
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    display:none;
+    text-align:center;
+    z-index: 10;
 }
 
 #overlay #day_click_modal {
-  margin-top: 10%;
+    margin-top: 10%;
 }
 
 .modal-card-normal {
@@ -115,7 +116,7 @@ h1 {
 }
 
 #calendar .fc-today {
-    background-color: #615055;
+    background-color: rgba(0,0,0,0.3);
 }
 
 #calendar .fc-today a {
@@ -123,7 +124,7 @@ h1 {
 }
 
 #calendar .fc-center {
-        color: #615055 !important;
+    color: #615055 !important;
 }
 
 
@@ -133,4 +134,10 @@ h1 {
 
 .simple-footer {
     text-align: center;
+}
+
+@media (min-width: 767px) {
+    #page-content {
+        margin-top: 70px; !important;
+    }
 }

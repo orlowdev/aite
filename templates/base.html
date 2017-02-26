@@ -24,9 +24,11 @@
     {% endblock %}
 </head>
 
-<body class="{% block body_class %}{% endblock %}" {% block body_attributes %}{% endblock %}>
+<body class="{% block body_class %}has-loading-screen{% endblock %}"
+        {% block body_attributes %} data-spy="scroll" data-target=".navigation"{% endblock %}>
 
 {% block pre_content %}
+    <div class="page-wrapper" id="page-top">
 {% endblock %}
 
 {% block messages %}
@@ -34,6 +36,7 @@
 {% endblock %}
 
 {% block navigation %}
+    {% include 'blocks/default_navigation.html' %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -46,9 +49,12 @@
 {% endblock %}
 
 {% block footer %}
+    {% include 'blocks/default_footer.html' %}
 {% endblock %}
 
 {% block post_content %}
+    </div>
+    </div>
 {% endblock %}
 
 {% block modals %}

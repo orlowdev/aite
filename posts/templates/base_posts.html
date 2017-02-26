@@ -2,64 +2,22 @@
 
 {% load staticfiles %}
 
+{% block title %}Blog{% endblock %}
+
 {% block stylesheets %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 {% endblock %}
 
-{% block title %}Blog{% endblock %}
-
-{% block body_class %}has-loading-screen{% endblock %}
-{% block body_attributes %}data-spy="scroll" data-target=".navigation"{% endblock %}
-
-{% block pre_content %}
-    <div class="page-wrapper" id="page-top">
-{% endblock %}
-
-{% block navigation %}
-    <header id="page-header">
-        <nav class="navigation nav-btn-only background-is-dark">
-            <div class="container">
-                <div class="wrapper">
-                    <div class="left">
-                        <!-- TODO: Move hardcoded styles -->
-                        <a href="/" class="brand" style="font-size: 3rem;">aite</a>
-                    </div>
-                    <div class="right">
-                        <ul class="nav navigation-links animate">
-                            {% if not request.user.is_authenticated %}
-                                <li><a href="{% url 'login' %}" class="scroll">Sign In</a></li>
-                                <li><a href="{% url 'register' %}" class="scroll">Sign Up</a></li>
-                            {% else %}
-                                <li><a href="{% url 'logout' %}" class="scroll">Logout</a></li>
-                            {% endif %}
-                        </ul>
-                        <div class="nav-btn">
-                            <figure></figure>
-                            <figure></figure>
-                            <figure></figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-{% endblock %}
-
 {% block breadcrumbs %}
     <div id="page-content">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb text-center">
         <li><a href="{% url 'index' %}">Home</a></li>
         <li><a href="{% url 'posts:list' %}">Blog</a></li>
 
         {% block post_detail_link %}{% endblock %}
     </ol>
-{% endblock %}
-
-{% block post_content %}
-    </div>
-    </div>
 {% endblock %}
 
 {% block footer_js %}
