@@ -48,6 +48,7 @@
                 navLinks: true,
                 editable: true,
                 dragOpacity: 1.0,
+                aspectRatio: 1.8,
                 windowResize: function(view) {
                     ww = getWindowWidth();
                     view = getView();
@@ -115,9 +116,9 @@
             let eventSourcesFromAPI = [];
 
             $.getJSON('/api/calendar/list/', function (data) {
-                    $.each(data, function ($key, $val) {
-                        calendar.fullCalendar('addEventSource', $val['url'])
-                    })
+                $.each(data, function ($key, $val) {
+                    calendar.fullCalendar('addEventSource', $val['url'])
+                })
             });
 
 
@@ -128,59 +129,17 @@
 {% block body_class %}has-loading-screen{% endblock %}
 {% block body_attributes %}data-spy="scroll" data-target=".navigation"{% endblock %}
 
-{% block pre_content %}
-    <div class="page-wrapper" id="page-top">
-{% endblock %}
-
-{% block navigation %}
-    <header id="page-header">
-
-        <nav class="navigation nav-btn-only background-is-dark">
-            <div class="container">
-                <div class="wrapper">
-                    <div class="left">
-                        <!-- TODO: Move hardcoded styles -->
-                        <a href="/" class="brand" style="font-size: 3rem;">aite</a>
-                    </div>
-                    <div class="right">
-                        <ul class="nav navigation-links animate">
-                            <li><a href="{% url 'dashboards:main' %}" class="scroll">Dashboard</a></li>
-                            <li><a href="{% url 'posts:list' %}" class="scroll">Blog</a></li>
-
-                            {% if not request.user.is_authenticated %}
-                                <li><a href="{% url 'login' %}" class="scroll">Sign In</a></li>
-                                <li><a href="{% url 'register' %}" class="scroll">Sign Up</a></li>
-                            {% else %}
-                                <li><a href="{% url 'logout' %}" class="scroll">Logout</a></li>
-                            {% endif %}
-
-                        </ul>
-                        <div class="nav-btn">
-                            <figure></figure>
-                            <figure></figure>
-                            <figure></figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-{% endblock %}
 
 {% block main %}
     <div id="page-content">
     <div class="container-fluid">
         <div class="col-sm-12 col-lg-10 col-lg-offset-1">
-        <div class="card">
-            <div class="calendar-container" id='calendar'></div>
-        </div>
+            <div class="card">
+                <div class="calendar-container" id='calendar'></div>
             </div>
-    <br/><br/><br/>
+        </div>
+        <br/>
     </div>
-{% endblock %}
-
-{% block footer %}
-    <div class="note simple-footer">&copy; 2017 Totemish</div>
 {% endblock %}
 
 {% block post_content %}
