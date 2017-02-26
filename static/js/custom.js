@@ -165,7 +165,6 @@ $(window).load(function(){
     centerVerticalNavigation();
 
         $('.dateinput').datepicker({ format: "yyyy/mm/dd" });
-
 });
 
 $(window).resize(function(){

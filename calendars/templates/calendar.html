@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 {% block stylesheets %}
     {{ block.super }}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/css/bootstrap-datetimepicker.min.css"/>
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 {% endblock %}
 
@@ -16,7 +19,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/js/bootstrap-datetimepicker.min.js"></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/locale-all.js"></script>
     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
@@ -24,7 +29,6 @@
         $(document).ready(function() {
 
             const $overlay = $('<div id="overlay"></div>');
-            $overlay.append($("#day_click_modal"));
             $("body").append($overlay);
 
             $overlay.click(function () {
@@ -34,6 +38,11 @@
             function getWindowWidth(){
                 return $(window).width();
             }
+
+            $('.datetimeinput').datetimepicker({
+                format: 'YYYY-MM-DD H:m',
+            });
+
 
             const calendar = $('#calendar');
 
@@ -109,26 +118,31 @@
                 locale: 'en',
 
                 dayClick: function(date, jsEvent, view) {
-                    $overlay.fadeIn();
+                    $("#addEvent").dialog({ modal: true, title: 'Create new event', width:400});
                 },
-            });
 
-            let eventSourcesFromAPI = [];
+                eventClick: function (calEvent, jsEvent, view) {
+
+                    $("#startTime").html(moment(calEvent.start).format('MMM Do h:mm A'));
+                    $("#endTime").html(moment(calEvent.end).format('MMM Do h:mm A'));
+                    $("#eventInfo").html(calEvent.description);
+
+                    $("#eventContent").dialog({ modal: true, title: calEvent.title, width:350});
+                }
+            });
 
             $.getJSON('/api/calendar/list/', function (data) {
                 $.each(data, function ($key, $val) {
                     calendar.fullCalendar('addEventSource', $val['url'])
                 })
             });
-
-
         });
     </script>
 {% endblock %}
 
-{% block body_class %}has-loading-screen{% endblock %}
-{% block body_attributes %}data-spy="scroll" data-target=".navigation"{% endblock %}
-
+{% block head_bottom %}
+    {{ form.media }}
+{% endblock %}
 
 {% block main %}
     <div id="page-content">
@@ -136,6 +150,19 @@
         <div class="col-sm-12 col-lg-10 col-lg-offset-1">
             <div class="card">
                 <div class="calendar-container" id='calendar'></div>
+            </div>
+            <div id="eventContent" title="Event Details" style="display:none;">
+                Start: <span id="startTime"></span><br>
+                End: <span id="endTime"></span><br><br>
+                <p id="eventInfo"></p>
+{#                <p><strong><a id="eventLink" href="" target="_blank">Read More</a></strong></p>#}
+            </div>
+            <div id="addEvent" title="Create New Event" style="display:none;">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ event_form|crispy }}
+                    <input class="btn btn-primary" type="submit" value="Save"/>
+                </form>
             </div>
         </div>
         <br/>
@@ -145,10 +172,6 @@
 {% block post_content %}
     </div>
     </div>
-{% endblock %}
-
-{% block modals %}
-    {% include 'modals/calendar/day_click_modal.html' %}
 {% endblock %}
 
 {% block footer_js %}

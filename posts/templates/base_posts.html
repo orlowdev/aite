@@ -4,12 +4,6 @@
 
 {% block title %}Blog{% endblock %}
 
-{% block stylesheets %}
-    {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
-{% endblock %}
-
 {% block breadcrumbs %}
     <div id="page-content">
     <ol class="breadcrumb text-center">
@@ -25,6 +19,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
     <script type="text/javascript" src="{% static 'js/scrollReveal.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.plugin.min.js' %}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
 {% endblock %}

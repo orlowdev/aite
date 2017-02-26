@@ -36,6 +36,7 @@ class Event(models.Model):
         null=True,
         blank=True,
     )
+    description = models.TextField()
 
     def __str__(self):
         return "{} at {}".format(self.title, datetime.datetime.strftime(self.start, "%Y-%m-%dT%X"))

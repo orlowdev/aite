@@ -101,6 +101,9 @@ body {
     z-index: 100;
     max-width: 50%;
     margin: auto;
+    position: fixed;
+    left: 50%;
+    top: 50%;
 }
 
 #calendar .fc-button {
@@ -130,10 +133,6 @@ body {
 
 #calendar .fc-event{
     box-shadow: 0 5px 5px rgba(0,0,0,0.1);
-}
-
-.simple-footer {
-    text-align: center;
 }
 
 @media (min-width: 767px) {
