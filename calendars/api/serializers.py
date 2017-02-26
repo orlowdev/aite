@@ -1,25 +1,28 @@
-from rest_framework.fields import SerializerMethodField
+from rest_framework.relations import HyperlinkedIdentityField
 from rest_framework.serializers import ModelSerializer
 
 from calendars.models import Event, Calendar
 
+events_url = HyperlinkedIdentityField(
+    view_name='api-calendars:events',
+    lookup_field='id',
+)
+
 
 class CalendarListSerializer(ModelSerializer):
-    events = SerializerMethodField()
+    url = events_url
 
     class Meta:
         model = Calendar
         fields = [
-            "id",
-            "name",
-            "events",
+            "url",
         ]
 
     def get_events(self, obj):
         c_qs = Event.objects.filter(calendar=obj)
-        comments = EventListSerializer(c_qs, many=True).data
+        events = EventListSerializer(c_qs, many=True).data
 
-        return comments
+        return events
 
 
 class EventListSerializer(ModelSerializer):
@@ -30,5 +33,4 @@ class EventListSerializer(ModelSerializer):
             "id",
             "title",
             "start",
-            "calendar",
         ]

@@ -37,7 +37,7 @@ class EventListAPIView(ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            queryset_list = Event.objects.all()
+            queryset_list = Event.objects.filter(calendar_id=self.kwargs['id'])
             query = self.request.GET.get('q')
 
             if query:

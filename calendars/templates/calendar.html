@@ -31,19 +31,17 @@
                 $(this).fadeOut();
             });
 
-            const event_sources = [{
-                url: '/api/calendar/list/',
-            }];
-
             function getWindowWidth(){
                 return $(window).width();
             }
 
-            $('#calendar').fullCalendar({
+            const calendar = $('#calendar');
+
+            calendar.fullCalendar({
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'agendaDay,agendaWeek,month listDay,listWeek,listMonth'
+                    right: 'agendaDay,agendaWeek,month'
                 },
                 weekNumbersWithinDays: true,
                 eventLimit: true,
@@ -53,7 +51,7 @@
                 windowResize: function(view) {
                     ww = getWindowWidth();
                     view = getView();
-                    let currentView = $('#calendar').fullCalendar('getView');
+                    let currentView = calendar.fullCalendar('getView');
 
                     function getView(){
                         if (ww <= 800) {
@@ -83,7 +81,6 @@
                 isRTL: false,
                 // Show weekends
                 weekends: true,
-                todayBackgroundColor: '#fff',
                 // Hide specific weekdays
                 hiddenDays: [],
                 // Dynamic amount of weeks in a month
@@ -113,9 +110,17 @@
                 dayClick: function(date, jsEvent, view) {
                     $overlay.fadeIn();
                 },
-
-                eventSources: event_sources,
             });
+
+            let eventSourcesFromAPI = [];
+
+            $.getJSON('/api/calendar/list/', function (data) {
+                    $.each(data, function ($key, $val) {
+                        calendar.fullCalendar('addEventSource', $val['url'])
+                    })
+            });
+
+
         });
     </script>
 {% endblock %}
@@ -139,12 +144,16 @@
                     </div>
                     <div class="right">
                         <ul class="nav navigation-links animate">
+                            <li><a href="{% url 'dashboards:main' %}" class="scroll">Dashboard</a></li>
+                            <li><a href="{% url 'posts:list' %}" class="scroll">Blog</a></li>
+
                             {% if not request.user.is_authenticated %}
                                 <li><a href="{% url 'login' %}" class="scroll">Sign In</a></li>
                                 <li><a href="{% url 'register' %}" class="scroll">Sign Up</a></li>
                             {% else %}
                                 <li><a href="{% url 'logout' %}" class="scroll">Logout</a></li>
                             {% endif %}
+
                         </ul>
                         <div class="nav-btn">
                             <figure></figure>
