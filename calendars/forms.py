@@ -5,19 +5,8 @@ from calendars.models import Event, Calendar
 
 class CreateOrUpdateEventForm(forms.ModelForm):
     title = forms.CharField()
-    calendar = forms.ModelChoiceField(
-        queryset=Calendar.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Calendar',
-            }
-        )
-    )
     start = forms.DateTimeField()
-
     end = forms.DateTimeField()
-
     description = forms.CharField(
         widget=forms.Textarea(
             attrs={
@@ -39,5 +28,7 @@ class CreateOrUpdateEventForm(forms.ModelForm):
         ]
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
+        self.user = kwargs.pop('user', None)
         super(CreateOrUpdateEventForm, self).__init__(*args, **kwargs)
+
+        self.fields['calendar'] = forms.ModelChoiceField(queryset=Calendar.objects.filter(user=self.user))
