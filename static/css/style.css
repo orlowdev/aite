@@ -284,7 +284,7 @@ Headers:		'Montserrat', sans-serif;
   content: "";
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .hero-section input[type="text"], .hero-section input[type="email"], .hero-section input[type="date"], .hero-section input[type="time"], .hero-section input[type="search"], .hero-section input[type="password"], .hero-section input[type="number"], .hero-section input[type="tel"], .hero-section textarea.form-control {
+  .hero-section input[type="text"], .hero-section input[type="email"], .hero-section input[type="date"], .hero-section input[type="time"], .hero-section input[type="search"], .hero-section input[type="password"], .hero-section input[type="number"], .hero-section input[type="tel"], .hero-section textarea.form-control, select, option {
     padding-bottom: 12px;
   }
 }
@@ -2848,7 +2848,7 @@ button.btn.arrow:after {
   margin-left: 5px;
 }
 
-input[type="text"], input[type="email"], input[type="date"], input[type="time"], input[type="search"], input[type="password"], input[type="number"], input[type="tel"], textarea.form-control {
+input[type="text"], input[type="email"], input[type="date"], input[type="time"], input[type="search"], input[type="password"], input[type="number"], input[type="tel"], textarea.form-control, select.form-control, option {
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
   border-radius: 0px;
@@ -2868,18 +2868,21 @@ input[type="text"], input[type="email"], input[type="date"], input[type="time"],
   height: inherit;
   font-size: 13px;
 }
-input[type="text"]:active, input[type="text"]:focus, input[type="email"]:active, input[type="email"]:focus, input[type="date"]:active, input[type="date"]:focus, input[type="time"]:active, input[type="time"]:focus, input[type="search"]:active, input[type="search"]:focus, input[type="password"]:active, input[type="password"]:focus, input[type="number"]:active, input[type="number"]:focus, input[type="tel"]:active, input[type="tel"]:focus, textarea.form-control:active, textarea.form-control:focus {
+input[type="text"]:active, input[type="text"]:focus, input[type="email"]:active, input[type="email"]:focus, input[type="date"]:active, input[type="date"]:focus, input[type="time"]:active, input[type="time"]:focus, input[type="search"]:active, input[type="search"]:focus, input[type="password"]:active, input[type="password"]:focus, input[type="number"]:active, input[type="number"]:focus, input[type="tel"]:active, input[type="tel"]:focus, textarea.form-control:active, textarea.form-control:focus, select.form-control:active, select.form-control:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  border: 0;
   background-color: rgba(0, 0, 0, 0.15);
 }
-input[type="text"]:hover, input[type="email"]:hover, input[type="date"]:hover, input[type="time"]:hover, input[type="search"]:hover, input[type="password"]:hover, input[type="number"]:hover, input[type="tel"]:hover, textarea.form-control:hover {
+input[type="text"]:hover, input[type="email"]:hover, input[type="date"]:hover, input[type="time"]:hover, input[type="search"]:hover, input[type="password"]:hover, input[type="number"]:hover, input[type="tel"]:hover, textarea.form-control:hover, select.form-control:hover {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  border: 0;
   background-color: rgba(0, 0, 0, 0.1);
 }
+
 
 textarea {
   resize: vertical;

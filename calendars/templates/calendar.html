@@ -22,7 +22,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.45/js/bootstrap-datetimepicker.min.js"></script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/locale-all.js"></script>
@@ -128,8 +128,9 @@
                     $("#startTime").html(moment(calEvent.start).format('MMM Do h:mm A'));
                     $("#endTime").html(moment(calEvent.end).format('MMM Do h:mm A'));
                     $("#eventInfo").html(calEvent.description);
+                    $("#title").html(calEvent.title);
 
-                    $("#eventContent").dialog({ modal: true, title: calEvent.title, width:350});
+                    $("#eventContent").modal('show');
                 }
             });
 
@@ -148,35 +149,45 @@
 
 {% block main %}
     <div id="page-content">
-    <div class="container-fluid">
-        <div class="col-sm-12 col-lg-10 col-lg-offset-1">
-            <div class="card">
-                <div class="calendar-container" id='calendar'></div>
-            </div>
-            <div id="eventContent" title="Event Details" style="display:none;">
-                Start: <span id="startTime"></span><br>
-                End: <span id="endTime"></span><br><br>
-                <p id="eventInfo"></p>
-                {#                <p><strong><a id="eventLink" href="" target="_blank">Read More</a></strong></p>#}
-            </div>
+        <div class="container-fluid">
+            <div class="col-sm-12 col-lg-10 col-lg-offset-1">
+                <div class="card">
+                    <div class="calendar-container" id='calendar'></div>
+                </div>
 
-            <div id="addEvent" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">{% if event %}{{ event }}{% else %}New event{% endif %}</h4>
+                <div id="eventContent" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"><span id="title"></span></h4>
+                            </div>
+                            <div class="modal-body">
+                                <span id="startTime"></span><br/>
+                                <span id="endTime"></span><br/>
+                                <span id="eventInfo"></span>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <form method="POST" action="" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{ event_form|crispy }}
-                                <input class="btn btn-primary" type="submit" value="Save"/>
-                            </form>
+                    </div>
+                </div>
+
+                <div id="addEvent" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">{% if event %}{{ event }}{% else %}New event{% endif %}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ event_form|crispy }}
+                                    <input class="btn btn-primary" type="submit" value="Save"/>
+                                </form>
+                            </div>
                         </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+                    </div>
+                </div>
 
             </div>
         </div>
