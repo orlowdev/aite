@@ -30,13 +30,6 @@
     <script>
         $(document).ready(function() {
 
-            const $overlay = $('<div id="overlay"></div>');
-            $("body").append($overlay);
-
-            $overlay.click(function () {
-                $(this).fadeOut();
-            });
-
             function getWindowWidth(){
                 return $(window).width();
             }
@@ -125,12 +118,13 @@
 
                 eventClick: function (calEvent, jsEvent, view) {
 
-                    $("#startTime").html(moment(calEvent.start).format('MMM Do h:mm A'));
-                    $("#endTime").html(moment(calEvent.end).format('MMM Do h:mm A'));
-                    $("#eventInfo").html(calEvent.description);
-                    $("#title").html(calEvent.title);
+                    $("#startTimeField").val(moment(calEvent.start).format("YYYY-MM-DD HH:mm"));
+                    $("#endTimeField").val(moment(calEvent.end).format("YYYY-MM-DD HH:mm"));
+                    $("#descriptionField").val(calEvent.description);
+                    $("#titleField").val(calEvent.title);
+                    $("#modalTitle").html(calEvent.title);
 
-                    $("#eventContent").modal('show');
+                    $("#addEvent").modal('show');
                 }
             });
 
@@ -139,6 +133,14 @@
                     calendar.fullCalendar('addEventSource', $val['url'])
                 })
             });
+        $('#addEvent').on('hidden.bs.modal', function (e) {
+            $("#startTimeField").val("");
+            $("#endTimeField").val("");
+            $("#descriptionField").val("");
+            $("#titleField").val("");
+            $("#modalTitle").html("New event");
+        });
+
         });
     </script>
 {% endblock %}
@@ -155,28 +157,12 @@
                     <div class="calendar-container" id='calendar'></div>
                 </div>
 
-                <div id="eventContent" class="modal fade" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title"><span id="title"></span></h4>
-                            </div>
-                            <div class="modal-body">
-                                <span id="startTime"></span><br/>
-                                <span id="endTime"></span><br/>
-                                <span id="eventInfo"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div id="addEvent" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">{% if event %}{{ event }}{% else %}New event{% endif %}</h4>
+                                <h4 class="modal-title"><span id="modalTitle">{% if event %}{{ event }}{% else %}New event{% endif %}</span></h4>
                             </div>
                             <div class="modal-body">
                                 <form method="POST" action="" enctype="multipart/form-data">

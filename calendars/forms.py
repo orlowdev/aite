@@ -4,18 +4,19 @@ from calendars.models import Event, Calendar
 
 
 class CreateOrUpdateEventForm(forms.ModelForm):
-    title = forms.CharField()
-    start = forms.DateTimeField()
-    end = forms.DateTimeField()
-    description = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Description',
-                'rows': 8,
-            },
-        )
-    )
+    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                          'placeholder': 'e.g. My birthday',
+                                                          'id': 'titleField'}))
+    start = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
+                                                                  'placeholder': 'e.g. 2017-02-28 07:24',
+                                                                  'id': 'startTimeField'}))
+    end = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control',
+                                                                'placeholder': 'e.g. 2017-02-28 07:24',
+                                                                'id': 'endTimeField'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control',
+                                                               'placeholder': 'Description',
+                                                               'rows': 8,
+                                                               'id': 'descriptionField'}))
 
     class Meta:
         model = Event
@@ -31,4 +32,6 @@ class CreateOrUpdateEventForm(forms.ModelForm):
         self.user = kwargs.pop('user', None)
         super(CreateOrUpdateEventForm, self).__init__(*args, **kwargs)
 
-        self.fields['calendar'] = forms.ModelChoiceField(queryset=Calendar.objects.filter(user=self.user))
+        self.fields['calendar'] = forms.ModelChoiceField(queryset=Calendar.objects.filter(user=self.user),
+                                                         widget=forms.Select(attrs={'class': 'form-control',
+                                                                                    'id': 'calendarField'}))
