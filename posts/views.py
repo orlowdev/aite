@@ -109,8 +109,6 @@ def post_create(request):
         messages.success(request, "<a href='#'>Successfully created</a>", extra_tags=options.ALLOW_FLASH_REDIRECT)
 
         return HttpResponseRedirect(post.get_absolute_url())
-    else:
-        messages.error(request, "Not successfully created")
 
     return render(request, "edit.html", {
         "form": form,

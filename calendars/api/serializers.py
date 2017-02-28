@@ -40,12 +40,17 @@ class EventListSerializer(ModelSerializer):
 
 class EventCreateUpdateSerializer(ModelSerializer):
     start = DateTimeField(
-        format="%Y-%m-%dT%X"
+        format="%Y-%m-%dT%X",
     )
     end = DateTimeField(
-        format="%Y-%m-%dT%X"
+        format="%Y-%m-%dT%X",
     )
 
     class Meta:
         model = Event
-        fields = ["title", "start", "end", "description", "calendar"]
+        fields = [
+            "title",
+            "start",
+            "end",
+            "calendar",
+        ]

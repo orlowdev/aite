@@ -14,7 +14,7 @@ def dashboard_main(request):
         event_form.save()
         messages.success(request, "<a href='#'>Successfully created</a>", extra_tags=options.ALLOW_FLASH_REDIRECT)
 
-        return HttpResponseRedirect('dashboard')
+        return HttpResponseRedirect('/dashboard')
 
     return render(request, 'user_dashboard.html', {
         'event_form': event_form
