@@ -34,6 +34,7 @@ class EventListSerializer(ModelSerializer):
             "id",
             "title",
             "start",
+            "end",
         ]
 
 
