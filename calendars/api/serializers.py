@@ -1,3 +1,4 @@
+from rest_framework.fields import DateTimeField
 from rest_framework.relations import HyperlinkedIdentityField
 from rest_framework.serializers import ModelSerializer
 
@@ -34,3 +35,16 @@ class EventListSerializer(ModelSerializer):
             "title",
             "start",
         ]
+
+
+class EventCreateUpdateSerializer(ModelSerializer):
+    start = DateTimeField(
+        format="%Y-%m-%dT%X"
+    )
+    end = DateTimeField(
+        format="%Y-%m-%dT%X"
+    )
+
+    class Meta:
+        model = Event
+        fields = ["title", "start", "end", "description", "calendar"]

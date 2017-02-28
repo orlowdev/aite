@@ -1,8 +1,8 @@
 from django.db.models import Q
 from rest_framework.filters import SearchFilter
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView
 
-from calendars.api.serializers import EventListSerializer, CalendarListSerializer
+from calendars.api.serializers import EventListSerializer, CalendarListSerializer, EventCreateUpdateSerializer
 from calendars.models import Event, Calendar
 
 
@@ -46,3 +46,11 @@ class EventListAPIView(ListAPIView):
                 ).distinct()
 
             return queryset_list
+
+
+class EventCreateAPIView(CreateAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventCreateUpdateSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
