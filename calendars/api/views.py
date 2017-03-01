@@ -1,7 +1,9 @@
 from django.db.models import Q
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.filters import SearchFilter
-from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateAPIView
 
+from calendars.api.permissions import IsOwnerOrReadOnly
 from calendars.api.serializers import EventListSerializer, CalendarListSerializer, EventCreateUpdateSerializer
 from calendars.models import Event, Calendar
 
@@ -45,4 +47,14 @@ class EventCreateAPIView(CreateAPIView):
     serializer_class = EventCreateUpdateSerializer
 
     def perform_create(self, serializer):
+        serializer.save()
+
+
+class EventUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventCreateUpdateSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    lookup_field = 'id'
+
+    def perform_update(self, serializer):
         serializer.save()
