@@ -113,6 +113,22 @@
                 nowIndicator: true,
                 locale: 'en',
 
+                eventResize: function (event, delta, revertFunc) {
+                    {% comment %}
+                    TODO: Fix API authentication
+                    {% endcomment %}
+{#                    console.log(event.id + ' ' + event.title + ' is now ' + event.end.format() + ' ' + event.source.url);#}
+{##}
+{#                    $.ajax({#}
+{#                        type: "PUT",#}
+{#                        url: event.source.url + event.id + '/edit',#}
+{#                        data: {#}
+{#                            "end": event.end#}
+{#                        },#}
+{#                        dataType: "json"#}
+{#                    });#}
+                },
+
                 dayClick: function(date, jsEvent, view) {
                     $("#addEvent").modal('show');
                 },

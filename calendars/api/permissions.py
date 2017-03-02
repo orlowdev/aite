@@ -5,6 +5,8 @@ class IsOwnerOrReadOnly(BasePermission):
     message = "Only the owner is allowed to execute this action"
     safe_methods = ['GET', 'PUT']
 
+    # TODO: Block GET here
+
     def has_permission(self, request, view):
         if request.method in self.safe_methods:
             return True
