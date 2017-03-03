@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'dashboards.apps.DashboardsConfig',
     'newsletters.apps.NewslettersConfig',
     'posts.apps.PostsConfig',
+    'to_do_lists.apps.ToDoListsConfig',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -180,4 +181,6 @@ REST_FRAMEWORK = {
 }
 
 if DEBUG:
-    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] += ('rest_framework.renderers.BrowsableAPIRenderer',)
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] += (
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
