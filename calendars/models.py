@@ -22,4 +22,4 @@ class Event(models.Model):
     calendar = models.ForeignKey(to=Calendar, null=True, blank=True)
 
     def __str__(self):
-        return "{} at {}".format(self.title, datetime.datetime.strftime(self.start, "%Y-%m-%dT%X%"))
+        return "{} at {}".format(self.title, datetime.datetime.strftime(self.start, "%Y-%m-%dT%X"))
