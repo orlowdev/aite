@@ -1,11 +1,9 @@
-from rest_framework.permissions import SAFE_METHODS, BasePermission
+from rest_framework.permissions import BasePermission
 
 
 class IsOwnerOrReadOnly(BasePermission):
     message = "Only the owner is allowed to execute this action"
-    safe_methods = ['GET', 'PUT']
-
-    # TODO: Block GET here
+    safe_methods = ['PUT', 'GET']
 
     def has_permission(self, request, view):
         if request.method in self.safe_methods:
@@ -13,7 +11,4 @@ class IsOwnerOrReadOnly(BasePermission):
         return False
 
     def has_object_permission(self, request, view, obj):
-
-        if request.method in SAFE_METHODS:
-            return True
         return obj.calendar.user == request.user

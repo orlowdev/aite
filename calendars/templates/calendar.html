@@ -53,7 +53,7 @@
                 editable: true,
                 dragOpacity: 1.0,
                 aspectRatio: 1.8,
-                timezone: 'local',
+                // timezone: 'local',
                 windowResize: function(view) {
                     ww = getWindowWidth();
                     view = getView();
@@ -114,19 +114,16 @@
                 locale: 'en',
 
                 eventResize: function (event, delta, revertFunc) {
-                    {% comment %}
-                    TODO: Fix API authentication
-                    {% endcomment %}
-{#                    console.log(event.id + ' ' + event.title + ' is now ' + event.end.format() + ' ' + event.source.url);#}
-{##}
-{#                    $.ajax({#}
-{#                        type: "PUT",#}
-{#                        url: event.source.url + event.id + '/edit',#}
-{#                        data: {#}
-{#                            "end": event.end#}
-{#                        },#}
-{#                        dataType: "json"#}
-{#                    });#}
+                    $.ajax({
+                        type: "PUT",
+                        url: event.source.url + event.id + '/edit/',
+                        data: {
+                            "start": event.start.format(),
+                            "end": event.end.format(),
+                            "title": event.title,
+                        },
+                        dataType: 'application/json'
+                    });
                 },
 
                 dayClick: function(date, jsEvent, view) {

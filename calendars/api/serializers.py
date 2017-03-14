@@ -52,5 +52,4 @@ class EventCreateUpdateSerializer(ModelSerializer):
             "title",
             "start",
             "end",
-            "calendar",
         ]

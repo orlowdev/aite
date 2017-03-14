@@ -51,7 +51,7 @@ class EventCreateAPIView(CreateAPIView):
 
 
 class EventUpdateAPIView(RetrieveUpdateAPIView):
-    queryset = Event.objects.all()
+    queryset = Event.objects.filter(id__gte=0)
     serializer_class = EventCreateUpdateSerializer
     permission_classes = [IsOwnerOrReadOnly]
     lookup_field = 'id'
