@@ -1,0 +1,114 @@
+[
+  {
+    "title": "Some Title 1",
+    "id": 1,
+    "description": "This is a book 1",
+    "text": "This is a book 1",
+    "publishDate": "2017-03-01 14:45:00",
+    "image": "http://lorempixel.com/640/480/city/",
+    "comments": [
+      {
+        "id": 1,
+        "text": "Comment 1"
+      },
+      {
+        "id": 2,
+        "text": "Comment 2"
+      }
+    ]
+  },
+  {
+    "title": "Some Title 2",
+    "id": 2,
+    "description": "This is a book 2",
+    "text": "This is a book 2",
+    "image": "http://lorempixel.com/640/480/city/",
+    "publishDate": "2017-03-01 14:45:00"
+  },
+  {
+    "title": "Some Title 1",
+    "id": 1,
+    "description": "This is a book 1",
+    "text": "This is a book 1",
+    "image": "http://lorempixel.com/640/480/city/",
+    "publishDate": "2017-03-01 14:45:00",
+    "comments": [
+      {
+        "id": 1,
+        "text": "Comment 1"
+      },
+      {
+        "id": 2,
+        "text": "Comment 2"
+      }
+    ]
+  },
+  {
+    "title": "Some Title 2",
+    "id": 2,
+    "description": "This is a book 2",
+    "text": "This is a book 2",
+    "image": "http://lorempixel.com/640/480/city/",
+    "publishDate": "2017-03-01 14:45:00"
+  },
+  {
+    "title": "Some Title 1",
+    "id": 1,
+    "description": "This is a book 1",
+    "text": "This is a book 1",
+    "publishDate": "2017-03-01 14:45:00",
+    "comments": [
+      {
+        "id": 1,
+        "text": "Comment 1"
+      },
+      {
+        "id": 2,
+        "text": "Comment 2"
+      }
+    ],
+    "image": "http://lorempixel.com/640/480/city/"
+  },
+  {
+    "title": "Some Title 2",
+    "id": 2,
+    "description": "This is a book 2",
+    "text": "This is a book 2",
+    "image": "http://lorempixel.com/640/480/city/",
+    "publishDate": "2017-03-01 14:45:00"
+  },
+  {
+    "title": "Some Title 1",
+    "id": 1,
+    "description": "This is a book 1",
+    "text": "This is a book 1",
+    "publishDate": "2017-03-01 14:45:00",
+    "image": "http://lorempixel.com/640/480/city/",
+    "comments": [
+      {
+        "id": 1,
+        "text": "Comment 1"
+      },
+      {
+        "id": 2,
+        "text": "Comment 2"
+      }
+    ]
+  },
+  {
+    "title": "Some Title 2",
+    "id": 2,
+    "description": "This is a book 2",
+    "text": "This is a book 2",
+    "image": "http://lorempixel.com/640/480/city/",
+    "publishDate": "2017-03-01 14:45:00"
+  },
+  {
+    "title": "Some Title 3",
+    "id": 3,
+    "description": "This is a book 3",
+    "text": "This is a book 3",
+    "image": "http://lorempixel.com/640/480/city/",
+    "publishDate": "2017-03-01 14:45:00"
+  }
+]

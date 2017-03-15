@@ -17,21 +17,15 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.views.generic.base import TemplateView
+
 from rest_framework_jwt.views import obtain_jwt_token
 
-from accounts.views import login_view, logout_view, register_view
-
-from . import views
+from src.angular_js.views import AngularTemplateView
 
 urlpatterns = [
-    url(r'^$', views.index, name="index"),
 
     url(r'^admin/', admin.site.urls),
-
-    url(r'^subscribe/', include("newsletters.urls", namespace="newsletters")),
-    url(r'^submit/', include("contact_forms.urls", namespace="contact-forms")),
-
-    url(r'^dashboard/', include("dashboards.urls", namespace="dashboards")),
 
     url(r'^api/auth/token', obtain_jwt_token),
     url(r'^api/comments/', include("comments.api.urls", namespace="api-comments")),
@@ -40,14 +34,13 @@ urlpatterns = [
     url(r'^api/posts/', include("posts.api.urls", namespace="api-posts")),
     url(r'^api/users/', include("accounts.api.urls", namespace="api-users")),
 
-    url(r'^comments/', include("comments.urls", namespace="comments")),
-    url(r'^posts/', include("posts.urls", namespace="posts")),
-
-    url(r'^login/$', login_view, name="login"),
-    url(r'^register/$', register_view, name="register"),
-    url(r'^logout/$', logout_view, name="logout"),
+    url(r'^api/templates/(?P<item>[A-Za-z0-9\_\-\.\/]+)\.html$', AngularTemplateView.as_view()),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [
+    url(r'', TemplateView.as_view(template_name='angular/main.html')),
+]

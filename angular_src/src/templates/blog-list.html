@@ -1,0 +1,38 @@
+<h1 ng-hide="searchQuery">Blog List</h1>
+<h1 ng-show="searchQuery">Results for {{ query }}</h1>
+<!-- <small><a href="#" ng-click='changeCols(4)'>4x</a></small> -->
+<div class="row">
+<div class="col-sm-6">
+<div class="row">
+<div class="col-sm-6">
+<input type="text" ng-model='query' class='form-control' placeholder="Filter">
+</div>
+<div class="col-sm-6">
+<select class="form-control" ng-model="order">
+  <option value="-publishDate">Recent</option>
+  <option value="publishDate">Older</option>
+  <option value="title">A-Z</option>
+  <option value="-title">Z-A</option>
+</select>
+</div>
+</div>
+<dir-pagination-controls ng-hide='query.length > 0' pagination-id="sub-content"></dir-pagination-controls>
+</div>
+</div>
+
+<div class="row">
+<div dir-paginate='post in items | orderBy: order | filter: query | itemsPerPage: 5 as postItems' pagination-id="sub-content">
+<div class="thumbnail">
+      <a ng-if="post.image" ng-href='/blog/{{ post.id }}'><img class="img-responsive" ng-src="{{ post.image }}" alt="{{ post.title }}"></a>
+      <div class="caption">
+        <a ng-href='/blog/{{ post.id }}'><h3>{{ post.title }}</h3></a>
+        <p>{{ post.text }} {{ post.publishDate }}</p>
+        <p><a class="btn btn-primary" ng-href='/blog/{{ post.id }}'>View</a></p>
+      </div>
+    </div>
+</div>
+</div>
+
+<span ng-if='postItems.length == 0'>No posts found</span>
+
+<dir-pagination-controls ng-hide='query.length > 0' pagination-id="sub-content"></dir-pagination-controls>
