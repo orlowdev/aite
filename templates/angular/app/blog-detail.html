@@ -1,13 +1,13 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div class="page-header">
-			<h1>{{ post.title }} <small>{{ post.publishDate }}</small></h1>
+			<h1>{{ post.title }} <small>{{ post.publication_date }}</small></h1>
 		</div>
 		<span ng-if='post.image'>
 		<img ng-src='{{ post.image }}' class="img-responsive"/><br/>
 		</span>
 
-		<p>{{ post.description }}</p>
+		<p>{{ post.content }}</p>
 		<hr/>
 
 		<div class="row" ng-show="comments.length > 0">

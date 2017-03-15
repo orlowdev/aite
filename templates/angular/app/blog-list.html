@@ -23,11 +23,11 @@
 <div class="row">
 <div dir-paginate='post in items | orderBy: order | filter: query | itemsPerPage: 5 as postItems' pagination-id="sub-content">
 <div class="thumbnail">
-      <a ng-if="post.image" ng-href='/blog/{{ post.id }}'><img class="img-responsive" ng-src="{{ post.image }}" alt="{{ post.title }}"></a>
+      <a ng-if="post.image" ng-href='/blog/{{ post.slug }}'><img class="img-responsive" ng-src="{{ post.image }}" alt="{{ post.title }}"></a>
       <div class="caption">
-        <a ng-href='/blog/{{ post.id }}'><h3>{{ post.title }}</h3></a>
+        <a ng-href='/blog/{{ post.slug }}'><h3>{{ post.title }}</h3></a>
         <p>{{ post.text }} {{ post.publishDate }}</p>
-        <p><a class="btn btn-primary" ng-href='/blog/{{ post.id }}'>View</a></p>
+        <p><a class="btn btn-primary" ng-href='/blog/{{ post.slug }}'>View</a></p>
       </div>
     </div>
 </div>
