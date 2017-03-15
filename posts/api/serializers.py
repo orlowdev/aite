@@ -75,6 +75,7 @@ class PostDetailSerializer(ModelSerializer):
 
 # Provides serialized Post list data
 class PostListSerializer(ModelSerializer):
+    image = SerializerMethodField()
     url = post_detail_url
     user = UserDetailSerializer(read_only=True)
 
@@ -86,4 +87,14 @@ class PostListSerializer(ModelSerializer):
             "url",
             "publication_date",
             "title",
+            "slug",
+            "image",
+
         ]
+
+    def get_image(self, obj):
+        try:
+            image = obj.image.url
+        except:
+            image = None
+        return image
