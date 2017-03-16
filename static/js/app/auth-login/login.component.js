@@ -12,7 +12,7 @@ component('login', {
             $scope.loggedIn = true;
             $cookies.remove("token");
             $scope.user = {
-                username: $cookies.get("username")
+                username: $cookies.get("username"),
             }
         }
 
@@ -25,7 +25,7 @@ component('login', {
                     username: user.username,
                     password: user.password,
                 },
-                headers: {}
+                headers: {},
             };
 
             var requestAction = $http(requestConfig);
