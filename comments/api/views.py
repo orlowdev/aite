@@ -1,4 +1,6 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
+from rest_framework.exceptions import ValidationError
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin
@@ -51,8 +53,23 @@ class CommentListAPIView(ListAPIView):
     pagination_class = PostPageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = Comment.objects.all()
+        queryset_list = []
         query = self.request.GET.get('q')
+        slug = self.request.GET.get('slug')
+        type = self.request.GET.get('type')
+        if slug:
+            model_type = type
+            model_qs = ContentType.objects.filter(model=model_type)
+            if model_qs.exists():
+                raise ValidationError("Invalid content type")
+
+            SomeModel = model_qs.first().model_class()
+            obj_qs = SomeModel.objects.filter(slug=slug)
+            if obj_qs.exists():
+                content_obj = obj_qs.first()
+                queryset_list = Comment.objects.filter_by_instance(content_obj)
+        else:
+            queryset_list = Comment.objects.filter(id__gte=0)
 
         if query:
             queryset_list = queryset_list.filter(

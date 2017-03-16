@@ -21,9 +21,11 @@ component('blogDetail', {
         	if (token) {
         		var request = {
 					method: "POST",
-					url: "http://127.0.0.1:8000/api/comments/create/?slug=" + slug + "&type=post",
+					url: "http://127.0.0.1:8000/api/comments/create/",
 					data: {
 						content: $scope.reply.content,
+                        slug: slug,
+                        type: "post",
 					},
 					headers: {
 						authorization: "JWT " + token,
