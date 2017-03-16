@@ -3,6 +3,7 @@
 angular.module('prep', [
 	// external
 	'angularUtils.directives.dirPagination',
+	'ngCookies',
 	'ngResource',
 	'ngRoute',
 	'ui.bootstrap',

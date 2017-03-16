@@ -15,6 +15,10 @@ angular.module('prep').
             when("/login", {
                 template: "<login></login>"
             }).
+			when("/logout", {
+                // template: "<login></login>",
+				redirectTo: "/login"
+            }).
     		when("/about", {
     			templateUrl: "/api/templates/about.html"
     		}).
@@ -27,5 +31,4 @@ angular.module('prep').
     		otherwise({
     			template: "Not found"
     		})
-
     });

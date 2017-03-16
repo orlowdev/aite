@@ -21,6 +21,8 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a ng-href="/blog">Blog</a></li>
+        <li><a ng-href="/login" ng-hide="userLoggedIn">Log In</a></li>
+        <li><a ng-href="/logout" ng-show="userLoggedIn">Log Out</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

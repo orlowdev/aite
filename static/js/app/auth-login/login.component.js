@@ -3,10 +3,18 @@
 angular.module('login').
 component('login', {
     templateUrl: '/api/templates/login.html',
-    controller: function ($http, $location, $routeParams, $rootScope, $scope) {
+    controller: function ($cookies, $http, $location, $routeParams, $rootScope, $scope) {
         var loginUrl = '/api/auth/token/';
-        $scope.user = {
-        };
+        $scope.user = {};
+
+        var tokenExists = $cookies.get("token");
+        if (tokenExists) {
+            $scope.loggedIn = true;
+            $cookies.remove("token");
+            $scope.user = {
+                username: $cookies.get("username")
+            }
+        }
 
         $scope.logUserIn = function (user) {
 
@@ -24,12 +32,17 @@ component('login', {
 
             requestAction.then(
                 // Success callback
-                function(response_data, response_status, response_headers, response_config) {
-                    console.log(response_data)
+                function(response) {
+                    console.log(response.data.token);
+                    $cookies.put("token", response.data.token);
+                    $cookies.put("username", user.username);
+
+                    // TODO: Add flash message
+                    $location.path("/");
                 },
                 // Error callback
-                function(error_data, error_status, error_headers, error_config) {
-                    console.log(error_data)
+                function(response) {
+                    console.log(response);
                 }
             );
         };
