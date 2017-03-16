@@ -3,14 +3,14 @@
 angular.module('blogList').
 	component('blogList', { 
 		templateUrl: "/api/templates/blog-list.html",
-		controller: function(Post, $location, $routeParams, $rootScope, $scope) {
-			var q = $location.search().q
+		controller: function(Post, $cookies, $location, $routeParams, $rootScope, $scope) {
+			var q = $location.search().q;
 			if (q) {
-				$scope.query = q
-				$scope.searchQuery = true
+				$scope.query = q;
+				$scope.searchQuery = true;
 			}
 
-			$scope.order = '-publishDate'
+			$scope.order = '-publishDate';
 
 			$scope.goToItem = function(post) {
 				$rootScope.$apply(function() {
@@ -26,23 +26,24 @@ angular.module('blogList').
 				}
 
 				setupCol($scope.items, $scope.numCols)
-			}
+			};
 
-			$scope.loadingQuery = false
+			$scope.loadingQuery = false;
+
 			$scope.$watch(function() {
 				if($scope.query) {
-					$scope.loadingQuery = true
-					$scope.cssClass = 'col-sm-12'
+					$scope.loadingQuery = true;
+					$scope.cssClass = 'col-sm-12';
 					if ($scope.query != q) {
 						$scope.searchQuery = false
 					}
 				} else {
 					if ($scope.loadingQuery) {
-						setupCol($scope.items, 2)
+						setupCol($scope.items, 2);
 						$scope.loadingQuery = false
 					}
 				}
-			})
+			});
 
 			function setupCol(data, number) {
 				if (angular.isNumber(number)) {
@@ -51,9 +52,9 @@ angular.module('blogList').
 					$scope.numCols = 2
 				}
 
-				$scope.cssClass = 'col-sm-' + (12 / $scope.numCols)
-				$scope.items = data
-				$scope.colItems = chunkArrayInGroups(data, $scope.numCols)
+				$scope.cssClass = 'col-sm-' + (12 / $scope.numCols);
+				$scope.items = data;
+				$scope.colItems = chunkArrayInGroups(data, $scope.numCols);
 			}
 
 			Post.query(function(data) {

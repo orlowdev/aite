@@ -5,7 +5,7 @@ angular.module('blogDetail').
 		templateUrl: "/api/templates/blog-detail.html",
 		controller: function(Post, $http, $location, $routeParams, $scope) {
 			Post.get({"slug": $routeParams.slug}, function (data) {
-                $scope.post = data
+                $scope.post = data;
             });
 			// Post.query(function (data) {
 			// 	$scope.notFound = true
@@ -25,13 +25,13 @@ angular.module('blogDetail').
 
 			$scope.deleteComment = function(comment) {
 				$scope.$apply($scope.comments.splice(comment, 1))
-			}
+			};
 
 			$scope.addReply = function() {
-				console.log($scope.reply)
-				$scope.comments.push($scope.reply)
-				resetReply()
-			}
+				console.log($scope.reply);
+				$scope.comments.push($scope.reply);
+				resetReply();
+			};
 
 			function resetReply() {
 				$scope.reply = {
@@ -41,7 +41,7 @@ angular.module('blogDetail').
 			}
 
 			if ($scope.notFound) {
-				$location.path("/")
+				$location.path("/");
 			}
 		}
 	});
