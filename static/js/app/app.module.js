@@ -11,5 +11,6 @@ angular.module('prep', [
 	'blogDetail',
 	'blogList',
 	'confirmClick',
+	'login',
 	'navigation',
 ]);

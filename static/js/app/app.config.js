@@ -12,6 +12,9 @@ angular.module('prep').
     		when("/", {
     			template: "<blog-list></blog-list>"
     		}).
+            when("/login", {
+                template: "<login></login>"
+            }).
     		when("/about", {
     			templateUrl: "/api/templates/about.html"
     		}).
