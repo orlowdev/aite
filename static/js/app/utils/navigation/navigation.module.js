@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('navigation', ['post']);
+angular.module('navigation', ['core.post']);

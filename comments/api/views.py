@@ -36,6 +36,7 @@ class CommentEditAPIView(DestroyModelMixin, UpdateModelMixin, RetrieveAPIView):
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
+    # TODO: Fix removing comments
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
@@ -58,9 +59,8 @@ class CommentListAPIView(ListAPIView):
         slug = self.request.GET.get('slug')
         type = self.request.GET.get('type')
         if slug:
-            model_type = type
-            model_qs = ContentType.objects.filter(model=model_type)
-            if model_qs.exists():
+            model_qs = ContentType.objects.filter(model=type)
+            if not model_qs.exists():
                 raise ValidationError("Invalid content type")
 
             SomeModel = model_qs.first().model_class()

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('post').
+angular.module('core.post').
 factory('Post', function ($resource) {
 
     var url = '/api/posts/:slug/';

@@ -3,56 +3,54 @@
 angular.module('blogDetail').
 component('blogDetail', {
     templateUrl: "/api/templates/blog-detail.html",
-    controller: function(Post, $cookies, $http, $location, $routeParams, $scope) {
+    controller: function(Comment, Post, $cookies, $http, $location, $routeParams, $scope) {
         var slug = $routeParams.slug;
 
-    	Post.get({"slug": slug}, function (data) {
+        Post.get({"slug": slug}, function (data) {
             $scope.post = data;
-            $scope.comments = data.comments;
+            Comment.query({"slug": slug, "type": "post"}, function (data) {
+                $scope.comments = data;
+            });
         });
 
         $scope.deleteComment = function(comment) {
-            $scope.$apply($scope.comments.splice(comment, 1))
+            comment.$delete({
+                    id: comment.id,
+                },
+                function (success) {
+                    $scope.comments.splice(comment, 1)
+                }, function (error) {
+                    console.log(error.data)
+                });
         };
 
         $scope.addReply = function() {
-        	var token = $cookies.get("token");
+            Comment.create({
+                content: $scope.reply.content,
+                slug: slug,
+                type: "post",
+            }, function (successResponse) {
+                $scope.comments.unshift(successResponse);
+                resetReply();
+            }, function (errorResponse) {
+                console.log(errorResponse.data);
+            });
+        };
 
-        	if (token) {
-        		var request = {
-					method: "POST",
-					url: "http://127.0.0.1:8000/api/comments/create/",
-					data: {
-						content: $scope.reply.content,
-                        slug: slug,
-                        type: "post",
-					},
-					headers: {
-						authorization: "JWT " + token,
-					},
-				};
-
-        		$http(request).then(
-        		    function (response) {
-                        $scope.comments.push($scope.reply);
-                        resetReply();
-                    }, function (response) {
-                        console.log(response);
-                    }
-                );
-
-				console.log($scope.reply);
-				resetReply();
-			} else {
-        		console.log("no token");
-			}
-
-
+        $scope.updateReply = function (comment) {
+            comment.$update({
+                id: comment.id,
+                content: $scope.reply.content,
+                slug: slug,
+                type: "post",
+            }, function (success) {
+            }, function (error) {
+                console.log(error.data);
+            })
         };
 
         function resetReply() {
             $scope.reply = {
-                id: $scope.comments.length + 1,
                 content: "",
             }
         }
