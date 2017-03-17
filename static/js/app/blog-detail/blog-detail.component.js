@@ -24,14 +24,29 @@ component('blogDetail', {
                 });
         };
 
-        $scope.addReply = function() {
+        $scope.addCommentReply = function (reply, parentComment) {
             Comment.create({
-                content: $scope.reply.content,
+                content: reply.content,
+                slug: slug,
+                type: "post",
+                parent_id: parentComment.id,
+
+            }, function (successResponse) {
+                parentComment.reply_count += 1;
+                reply.content = "";
+            }, function (errorResponse) {
+                console.log(errorResponse.data);
+            });
+        };
+
+        $scope.addComment = function() {
+            Comment.create({
+                content: $scope.newComment.content,
                 slug: slug,
                 type: "post",
             }, function (successResponse) {
                 $scope.comments.unshift(successResponse);
-                resetReply();
+                resetComment();
             }, function (errorResponse) {
                 console.log(errorResponse.data);
             });
@@ -49,8 +64,8 @@ component('blogDetail', {
             })
         };
 
-        function resetReply() {
-            $scope.reply = {
+        function resetComment() {
+            $scope.newComment = {
                 content: "",
             }
         }
