@@ -46,8 +46,11 @@ component('blogDetail', {
             slug: slug,
             type: "post",
          }, function (successResponse) {
+            data.reply_count = 0;
             $scope.comments.unshift(successResponse);
             resetComment();
+         }, function (errorResponse) {
+            $scope.commentError = errorResponse.data;
          });
       };
 

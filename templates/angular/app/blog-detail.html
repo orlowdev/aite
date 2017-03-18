@@ -11,18 +11,23 @@
     <hr/>
 
     <div class="row">
-    <div class="col-md-6">
-      <form ng-submit='addComment()'>
-        <textarea class="form-control" ng-model='newComment.content'></textarea>
-        <input class="btn btn-default" type='submit' value="Add Comment"/>
-      </form>
+      <div class="col-md-6">
+        <form ng-submit='addComment()'>
+          <div class="form-group" ng-class="{ 'has-error': commentError.content }">
+            <textarea id="commentTextArea" class="form-control" placeholder="New comment" ng-model='newComment.content'></textarea>
+            <label class="control-label" for="commentTextArea" ng-if="commentError.content">
+              <span ng-repeat="error in commentError.content">{{ error }}<br/></span>
+            </label>
+          </div>
+          <input class="btn btn-default" type='submit' value="Add Comment"/>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <p style="color: red;" ng-if='newComment.content'>Preview:</p>
+        <p>{{ newComment.content }}</p>
+      </div>
     </div>
-    <div class="col-md-6">
-      <p style="color: red;" ng-if='newComment.content'>Preview:</p>
-      <p>{{ newComment.content }}</p>
-    </div>
-</div>
-        <hr/>
+    <hr/>
 
     <div class="row" ng-show="comments.length > 0">
       <div class="col-md-6">
