@@ -7,7 +7,7 @@ directive('commentReplyThread', function (Comment) {
       scope: {
          comment: '=comment',
       },
-      template: "<ul ng-show='replies'><li ng-repeat='reply in replies'>{{ reply.content }}</li></ul>" +
+      template: "<div ng-show='replies'><div class='row' style='margin-top: 20px;' ng-repeat='reply in replies'><div class='col-md-12'><div class='panel panel-default'><div class='panel-body'>{{ reply.content }}<br/>{{ user }} | <a href='#'><i class='glyphicon glyphicon-remove'></i></a></div></div><div></div></div>" +
       "<div ng-show='!replies' class='center-block'><img ng-src='/static/img/ring.gif' class='img-responsive'/></div>",
       link: function (scope, element, attr) {
          if (scope.comment && scope.comment.id) {
