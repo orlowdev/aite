@@ -13,6 +13,7 @@ component('blogDetail', {
          });
       });
 
+      $scope.newComment = {};
       $scope.commentOrder = '-created_at';
 
       $scope.deleteComment = function(comment) {
@@ -36,8 +37,6 @@ component('blogDetail', {
          }, function (successResponse) {
             parentComment.reply_count += 1;
             reply.content = "";
-         }, function (errorResponse) {
-            console.log(errorResponse.data);
          });
       };
 
@@ -49,8 +48,6 @@ component('blogDetail', {
          }, function (successResponse) {
             $scope.comments.unshift(successResponse);
             resetComment();
-         }, function (errorResponse) {
-            console.log(errorResponse.data);
          });
       };
 
