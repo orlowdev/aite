@@ -13,8 +13,10 @@ directive('commentReplyThread', function (Comment) {
          if (scope.comment && scope.comment.id) {
             Comment.get({
                id: scope.comment.id,
-            }, function (success) {
-               scope.replies = success.replies
+            }, function (successResponse) {
+               scope.replies = successResponse.replies
+            }, function (errorResponse) {
+               scope.replyError = errorResponse.replies
             })
          }
       },

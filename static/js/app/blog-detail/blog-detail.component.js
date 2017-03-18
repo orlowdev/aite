@@ -14,8 +14,10 @@ component('blogDetail', {
       });
 
       $scope.newComment = {};
+      $scope.reply = {};
       $scope.commentOrder = '-created_at';
 
+      // TODO: FIX DELETION
       $scope.deleteComment = function(comment) {
          comment.$delete({
                   id: comment.id,
@@ -27,6 +29,7 @@ component('blogDetail', {
                });
       };
 
+      // TODO: FIX ADDING REPLIES
       $scope.addCommentReply = function (reply, parentComment) {
          Comment.create({
             content: reply.content,
@@ -35,7 +38,7 @@ component('blogDetail', {
             parent_id: parentComment.id,
 
          }, function (successResponse) {
-            parentComment.reply_count += 1;
+            parentComment.reply_count = parentComment.reply_count ? parentComment.reply_count += 1 : 1;
             reply.content = "";
          });
       };

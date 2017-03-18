@@ -61,7 +61,14 @@
             <comment-reply-thread comment="comment"></comment-reply-thread>
             <p style="color: red;" ng-if='reply.content'>Preview: {{ reply.content }}</p>
             <form ng-submit='addCommentReply(reply, comment)'>
-              <textarea class="form-control" ng-model='reply.content' placeholder="Reply..."></textarea>
+
+
+              <div class="form-group" ng-class="{ 'has-error': replyError.content }">
+                <textarea id="replyTextArea_{{ comment.id }}" class="form-control" placeholder="Reply" ng-model='reply.content'></textarea>
+                <label class="control-label" for="replyTextArea_{{ comment.id }}" ng-if="replyError.content">
+                  <span ng-repeat="error in replyError.content">{{ error }}<br/></span>
+                </label>
+              </div>
               <input class="btn btn-sm btn-default" type='submit' value="Reply"/>
             </form>
           </div>
