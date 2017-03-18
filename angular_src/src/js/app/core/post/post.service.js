@@ -10,7 +10,7 @@ angular.module('post').
 				isArray: true,
 				cache: false,
 				// transformResponse
-				// interceptor
+				// interceptors
 			},
 			get: {
 				method: "GET",

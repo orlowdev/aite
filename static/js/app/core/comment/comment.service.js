@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('core.comment').
-factory('Comment', function ($cookies, $httpParamSerializer, $location, $resource) {
+factory('Comment', function (LoginRequiredInterceptor, $cookies, $httpParamSerializer, $location, $resource) {
    var url = '/api/comments/:id/';
    var commentQuery = {
       url: url,
@@ -17,17 +17,7 @@ factory('Comment', function ($cookies, $httpParamSerializer, $location, $resourc
       url: "/api/comments/create/",
       method: "POST",
       interceptor: {
-         responseError: function (response) {
-            if (response.status == 401) {
-               var currentPath = $location.path();
-
-               if (currentPath == "/login") {
-                  $location.path("/login")
-               }
-
-               $location.path("/login").search("next", currentPath);
-            }
-         },
+         responseError: LoginRequiredInterceptor,
       },
    };
    var commentGet = {
@@ -40,11 +30,17 @@ factory('Comment', function ($cookies, $httpParamSerializer, $location, $resourc
       url: url,
       method: "PUT",
       params: {"id": "@id"},
+      interceptor: {
+         responseError: LoginRequiredInterceptor,
+      },
    };
    var commentDelete = {
       url: url,
       method: "DELETE",
       params: {"id": "@id"},
+      interceptor: {
+         responseError: LoginRequiredInterceptor,
+      },
    };
 
    var token = $cookies.get("token");

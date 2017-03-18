@@ -14,7 +14,6 @@ factory('Post', function ($resource) {
             transformResponse: function (data, headersGetter, status) {
                 return angular.fromJson(data).results;
             }
-            // interceptor
         },
         get: {
             method: "GET",
